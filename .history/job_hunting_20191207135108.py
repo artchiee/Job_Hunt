@@ -6,33 +6,39 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
 
-# defining url 
+# defining url
 global start_url
-start_url  = "https://www.instagram.com/cristiano/"
 
-# path for chrome webdrive
-driver = webdriver.Chrome("C:\\Users\\nouamane\\Downloads\\chromedriver")
+# indeed url only for 'morocco' jobs
+start_url = "https://ma.indeed.com"
+
+# path for chrome webdrive (change this path accordding to my pc)
+driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
 
 # search string
 
-
-search_field = str(input("what user you looking for?!! "+ "\n"))
+job_title = str(input("what job type you looking for?!! " + "\n"))
 # fire (target url)
 
 driver.get(start_url)
 
-# associate the search with instagram search 
+# associate the search with indeed search
 
-user_search  = driver.find_element_by_class_name('x3qfX')
-user_search.send_keys(search_field)
+job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
+job_field.send_keys(job_title)
 
-# befor hitting enter pause for 3
-time.sleep(3)
-user_search.send_keys(Keys.ENTER)
-#pause for anothe 2s
+# inside LOcation field (delete location if it was already insertead by default)
+
+location_field = driver.find_element_by_xpath(
+    '//*[@id="text-input-where"]').clear()
+
+
+# befor hitting enter pause for 2
 time.sleep(2)
-user_search.send_keys(Keys.ENTER)
-	# getting users posts
+job_field.send_keys(Keys.ENTER)
+
+
+# getting users posts
 
 # all_posts == []
 
@@ -43,7 +49,7 @@ user_search.send_keys(Keys.ENTER)
 # 	find_attribute = data.find_all('meta', attrs={'property': 'og:description'})
 # 	followers = find_attribute[0]
 
-# 	#giving spesific number to small profiles 
+# 	#giving spesific number to small profiles
 # 	#small_profile = 100
 # 	# mediocre_profile = 500
 # 	# viral_profile = 1000
@@ -52,12 +58,3 @@ user_search.send_keys(Keys.ENTER)
 # 	find_posts.find_element_by_css_selector('a').get_attribute('href')
 
 # 	driver = webdrive.Chrome("C:\\Users\\nouamane\\Downloads\\chromedriver")
-
-
-
-
-
-
-
-
-

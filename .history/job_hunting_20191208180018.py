@@ -30,8 +30,7 @@ job_field.send_keys(job_title)
 #     input("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
 
 
-location_field =''
-def clear_location_field(location_field):
+def clear_location_field():
     location_field = driver.find_element_by_xpath('//*[@id="text-input-where"]')
 
     # delete input field insearted by default 
@@ -40,6 +39,6 @@ def clear_location_field(location_field):
 
     location_field.send_keys(Keys.ENTER)
 
-clear_location_field(location_field)    
+clear_location_field()
 
 

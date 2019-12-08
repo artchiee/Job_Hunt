@@ -18,7 +18,7 @@ driver = webdriver.Chrome("C:\\Users\\nouamane\\Downloads\\chromedriver")
 # search string 
 job_title = str(input("what job type you looking for?!! " + "\n"))
 
-# fire (target url) 
+# fire (target url)
 driver.get(start_url)
 
 # associate the search with indeed search
@@ -29,17 +29,23 @@ job_field.send_keys(job_title)
 # location = str(
 #     input("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
 
+location_field = driver.find_element_by_xpath('//*[@id="text-input-where"]')
 
-location_field =''
-def clear_location_field(location_field):
-    location_field = driver.find_element_by_xpath('//*[@id="text-input-where"]')
+location_field.send_keys(Keys.CONTROL + "a")
+location_filed.send_keys(Keys.DELETE)
 
-    # delete input field insearted by default 
-    location_field.send_keys(Keys.CONTROL + "a")
-    location_field.send_keys(Keys.DELETE)
+location_field.send_keys(Keys.ENTER)
+# def clear_location_field(self, location_filed):
+#     location_field = driver.find_element_by_xpath(
+#         '//*[@id="text-input-where"]')
 
-    location_field.send_keys(Keys.ENTER)
+#         # see if the form is filled by default 
+#     if location_field == 'Agadir':
+#         #location_field.send_keys(location)
+#         location_field.send_keys(Keys.CLEAR)
+#         location_field.send_keys(Keys.ENTER)
 
-clear_location_field(location_field)    
+# # call the def 
 
+#     clear_location_field(location_field)
 

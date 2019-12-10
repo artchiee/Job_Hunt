@@ -32,43 +32,42 @@ location_field = ''
 def clear_location_field(location_field):
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
-
-    # Declare those var as Global
-    global location_input
-    global name
+    
+    #Declare those var as Global
+    global location_input 
+    global name 
     global answer_me
 
     # VAlidate if location filed empty or not (by Default)
     if location_field == '':
         location_input = str(input
-                             ("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
-
-        answer_me = str(input(' Yes --> give location' +
-                              ' |||' + 'No --> See all' + '\n'))
-        if answer_me == 'yes':
+            ("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
+        
+        answer_me = str(input(' Yes --> give location' + ' |||' + 'No --> See all' + '\n'))
+        if answer_me == 'yes': 
             name = str(input('Enter location'))
             location_field.send_keys(name)
             location_field.send_keys(Keys.ENTER)
-
+        
         # if answer is NO
-        else:
+        else: 
             time.sleep(1)
             location_field.send_keys(Keys.ENTER)
-
+  
     else:
         location_field.send_keys(Keys.CONTROL + "a")
         location_field.send_keys(Keys.DELETE)
         time.sleep(3)
 
         # after deleting promte me to this string again
-        print(location_input + '\n' + '--' + answer_me)
-
+        print(location_input + '\n' + '--' +  answer_me)
+        
         #answer is yes
         if answer_me == 'yes':
             print(name)
             location_field.send_keys(name)
-            location_field.send_keys(Keys.ENTER)
-        # if answer is NO
+            location_field.send_keys(Keys.ENTER)    
+        # if answer is NO    
         else:
             time.sleep(2)
             location_field.send_keys(Keys.ENTER)

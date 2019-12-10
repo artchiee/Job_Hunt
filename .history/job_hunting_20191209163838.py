@@ -26,49 +26,33 @@ job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
 
-location_field = ''
-
+location_field = '' 
 
 def clear_location_field(location_field):
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
 
-    # Declare those var as Global
-    global location_input
-    global name
-    global answer_me
-
-    # VAlidate if location filed empty or not (by Default)
+    # VAlidate if location filed empty or not 
     if location_field == '':
-        location_input = str(input
-                             ("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
+        
+        #set location_input to global
+        global location_input
+        location_input = str(input("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
+        location_field.send_keys(location_input)
+        location_field.send_keys(Keys.ENTER)
 
-        answer_me = str(input(' Yes --> give location' +
-                              ' |||' + 'No --> See all' + '\n'))
-        if answer_me == 'yes':
-            name = str(input('Enter location'))
-            location_field.send_keys(name)
-            location_field.send_keys(Keys.ENTER)
-
-        # if answer is NO
-        else:
-            time.sleep(1)
-            location_field.send_keys(Keys.ENTER)
-
-    else:
+    else: 
         location_field.send_keys(Keys.CONTROL + "a")
         location_field.send_keys(Keys.DELETE)
         time.sleep(3)
 
-        # after deleting promte me to this string again
-        print(location_input + '\n' + '--' + answer_me)
-
-        #answer is yes
+        # after deleting promte me to this string again 
+        print(location_input)
+        answer_me  =  str(input(' Yes --> give location' + '\n'+ 'No --> See all'))
         if answer_me == 'yes':
-            print(name)
+            name = str(input('Enter location'))
             location_field.send_keys(name)
             location_field.send_keys(Keys.ENTER)
-        # if answer is NO
         else:
             time.sleep(2)
             location_field.send_keys(Keys.ENTER)

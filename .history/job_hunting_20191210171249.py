@@ -25,10 +25,12 @@ driver.get(start_url)
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
-# test here 
+# test here (empty location field)
 location_field = driver.find_element_by_xpath('//*[@id="text-input-where"]')
 location_field.send_keys(Keys.CONTROL + "a")
 location_field.send_keys(Keys.DELETE)
+location_field.send_keys(Keys.ENTER)
+
 
 def enter_location(enter_location):
     location_field = driver.find_element_by_xpath('//*[@id="text-input-where"]')
@@ -38,8 +40,6 @@ def enter_location(enter_location):
                 input('enter location or see all available jobs ' + '\n'))
             answer_me = str(
                 input('yes --> give location  ||| ' + 'no --> see all'))
-            
-            print(location_input  +  answer_me)
 
             #answer is yes
             if answer_me == 'yes':
@@ -63,14 +63,15 @@ def enter_location(enter_location):
 
 # clear location_field if it was filled (by defalute)
 
-def clear_location_field(location_field):
-    location_field = driver.find_element_by_xpath(
-        '//*[@id="text-input-where"]')
+# def clear_location_field(location_field):
+#     location_field = driver.find_element_by_xpath(
+#         '//*[@id="text-input-where"]')
 
-    location_field.send_keys(Keys.CONTROL + "a")
-    location_field.send_keys(Keys.DELETE)
-
+#     location_field.send_keys(Keys.CONTROL + "a")
+#     location_field.send_keys(Keys.DELETE)
+#     location_field.send_keys(Keys.ENTER)
 
 
 # call the two functions
 enter_location(enter_location)
+# clear_location_field(location_field)

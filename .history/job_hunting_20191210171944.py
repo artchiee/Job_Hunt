@@ -25,7 +25,6 @@ driver.get(start_url)
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
-# test here 
 location_field = driver.find_element_by_xpath('//*[@id="text-input-where"]')
 location_field.send_keys(Keys.CONTROL + "a")
 location_field.send_keys(Keys.DELETE)

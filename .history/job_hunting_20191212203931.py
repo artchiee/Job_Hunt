@@ -40,6 +40,7 @@ def enter_location(location_field, give_location):
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
 
+    give_location = str('Enter location')
     try:
         if location_field == '':
             location_input = str(
@@ -52,7 +53,7 @@ def enter_location(location_field, give_location):
             #answer is yes
             if answer_me == 'yes':
                 give_location = str(input('Enter location'))
-                location_field.send_keys(give_location)
+                location_field.send_keys(enter_location)
                 location_field.send_keys(Keys.ENTER)
 
             # answer == no
@@ -67,12 +68,11 @@ def enter_location(location_field, give_location):
             location_field.send_keys(Keys.ENTER)
             time.sleep(3)
 
-            print('give location now :' + "   " ) 
-            give_location
+            print('give location now ' + '\n' + input(give_location))
             location_field.send_keys(give_location)
-            location_field.send_keys(Keys.ENTER)    
+            location_field.send_keys(Keys.ENTER)
 
-    except: 
+    except:
         Exception()
 
 
@@ -91,4 +91,4 @@ def enter_location(location_field, give_location):
 
 
 # call the two functions
-enter_location(location_field, give_location= 'casa')
+enter_location(location_field, give_location = 'agadir')

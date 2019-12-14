@@ -40,6 +40,7 @@ def enter_location(location_field, give_location):
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
 
+    give_location = ''
     try:
         if location_field == '':
             location_input = str(
@@ -67,8 +68,7 @@ def enter_location(location_field, give_location):
             location_field.send_keys(Keys.ENTER)
             time.sleep(3)
 
-            print('give location now :' + "   " ) 
-            give_location
+            print('give location now :  ' + "  " + input(give_location))
             location_field.send_keys(give_location)
             location_field.send_keys(Keys.ENTER)    
 
@@ -91,4 +91,4 @@ def enter_location(location_field, give_location):
 
 
 # call the two functions
-enter_location(location_field, give_location= 'casa')
+enter_location(location_field, give_location = 'agadir')

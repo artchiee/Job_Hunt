@@ -36,7 +36,7 @@ global location_input
 location_input = ''
 
 
-def enter_location(location_field, give_location):
+def enter_location(location_field, user_input):
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
 
@@ -91,4 +91,4 @@ def enter_location(location_field, give_location):
 
 
 # call the two functions
-enter_location(location_field, give_location= 'casa')
+enter_location(location_field, give_location= casa)

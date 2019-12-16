@@ -76,16 +76,18 @@ def enter_clear_location():
 locations_lists = []
 
 
-def select_location(enter='casa'):
+def select_location():
+         #all_locations = []
+
     span_tag = driver.find_element_by_xpath(
         '//*[@id="rb_Location"]/div[1]/span')
     # div tag
     span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
     # ul tag
     element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
-    locations_lists = element.find_elements_by_tag_name('li')
+    element.find_elements_by_tag_name('li')
     # locate a tag and it's hrefs
-    for link in locations_lists.find_elements_by_tag_name('a'):
+    for link in element.find_elements_by_tag_name('a'):
         try:
              # this list of [l1, l2 /] etc , are location's name aka cities
             l1 = link.find_element_by_xpath(
@@ -100,22 +102,23 @@ def select_location(enter='casa'):
                 '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
             l6 = link.find_element_by_xpath(
                 '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
-            # Get locations name
-            for item in locations_lists:
-                text = item.text
-                print(', '.join(text))
 
-            enter = input('location : ')
-            if enter == 'casa ':
-                casa.click()
-                time.sleep(3)
-                # in casee of a popup aka alert windows (Dismissed it)
-                # Switch to the popup windows & locate it's xpath
-                popup = driver.find_element_by_xpath(
-                    '//*[@id="popover-close-link"]')
-                popup.click()
-            else:
-                break
+            # Get locations name
+            for items in element:
+                text = items.text
+                print('\n'.join(str(l) for l in text))
+                #print(" " , " " , " " ," ", " ", " ")
+                enter = input('location : ' + " ")
+                if enter == 'casa ':
+                    casa.click()
+                    time.sleep(3)
+                    # in casee of a popup aka alert windows (Dismissed it)
+                    # Switch to the popup windows & locate it's xpath
+                    popup = driver.find_element_by_xpath(
+                        '//*[@id="popover-close-link"]')
+                    popup.click()
+                else:
+                    break
 
         except:
             Exception()

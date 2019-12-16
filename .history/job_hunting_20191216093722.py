@@ -13,7 +13,6 @@ global start_url
 # indeed url only for 'morocco' jobs
 start_url = "https://indeed.com"
 
-
 # path for my B.PC
 driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
 
@@ -35,7 +34,7 @@ location_input = ''
 enter = ''
 
 
-def enter_clear_location():
+def enter_location(enter="casa"):
     global location_field
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
@@ -70,57 +69,32 @@ def enter_clear_location():
     except:
         Exception()
 
+
 # Move on to the secont page
-
-
-locations_lists = []
-
-
-def select_location(enter='casa'):
+def select_location(enter="casa"):
+         #all_locations = []
     span_tag = driver.find_element_by_xpath(
         '//*[@id="rb_Location"]/div[1]/span')
     # div tag
     span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
     # ul tag
-    element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
-    locations_lists = element.find_elements_by_tag_name('li')
+    element = span_tag.find _element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
+    element.find_elements_by_tag_name('li')
     # locate a tag and it's hrefs
-    for link in locations_lists.find_elements_by_tag_name('a'):
+    for link in element.find_elements_by_tag_name('a'):
         try:
-             # this list of [l1, l2 /] etc , are location's name aka cities
-            l1 = link.find_element_by_xpath(
+            casa = link.find_element_by_xpath(
                 '//*[@id="LOCATION_rbo"]/ul/li[1]/a')
-            l2 = link.find_element_by_xpath(
-                '//*[@id="LOCATION_rbo"]/ul/li[2]/a')
-            l3 = link.find_element_by_xpath(
-                '//*[@id="LOCATION_rbo"]/ul/li[3]/a')
-            l4 = link.find_element_by_xpath(
-                '//*[@id="LOCATION_rbo"]/ul/li[4]/a')
-            l5 = link.find_element_by_xpath(
-                '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
-            l6 = link.find_element_by_xpath(
-                '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
-            # Get locations name
-            for item in locations_lists:
-                text = item.text
-                print(', '.join(text))
-
             enter = input('location : ')
-            if enter == 'casa ':
+            if enter == 'casa':
                 casa.click()
-                time.sleep(3)
-                # in casee of a popup aka alert windows (Dismissed it)
-                # Switch to the popup windows & locate it's xpath
-                popup = driver.find_element_by_xpath(
-                    '//*[@id="popover-close-link"]')
-                popup.click()
             else:
-                break
-
+                break 
+                  
         except:
             Exception()
 
 
 # call the two functions
-enter_clear_location()
+enter_location()
 select_location()

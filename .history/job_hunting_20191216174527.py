@@ -85,7 +85,7 @@ def select_location(enter='casa'):
     element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
     locations_lists = element.find_elements_by_tag_name('li')
     # locate a tag and it's hrefs
-    for link in locations_lists.find_elements_by_tag_name('a'):
+    for link in locations_lists.find_element_by_tag_name('a'):
         try:
              # this list of [l1, l2 /] etc , are location's name aka cities
             l1 = link.find_element_by_xpath(

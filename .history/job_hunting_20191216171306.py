@@ -83,9 +83,9 @@ def select_location(enter='casa'):
     span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
     # ul tag
     element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
-    locations_lists = element.find_elements_by_tag_name('li')
+    items = element.find_elements_by_tag_name('li')
     # locate a tag and it's hrefs
-    for link in locations_lists.find_elements_by_tag_name('a'):
+    for link in items.find_elements_by_tag_name('a'):
         try:
              # this list of [l1, l2 /] etc , are location's name aka cities
             l1 = link.find_element_by_xpath(
@@ -101,9 +101,9 @@ def select_location(enter='casa'):
             l6 = link.find_element_by_xpath(
                 '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
             # Get locations name
-            for item in locations_lists:
+            for item in items:
                 text = item.text
-                print(', '.join(text))
+                print(', '.join(item))
 
             enter = input('location : ')
             if enter == 'casa ':

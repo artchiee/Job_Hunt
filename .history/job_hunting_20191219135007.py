@@ -115,8 +115,8 @@ def select_location():
     for links in soup.find_all('div', attrs={'id': 'LOCATION_rbo'}):
         liss = links.find('ul').find('li')
         for lis in liss.find_all('a', href=True):
-            found = lis['href']
-            print("Founded urls : ", found)
+            found = lis.get_attribute('href')
+            print(locations_lists.append(found))
 
 
 # call the two functions

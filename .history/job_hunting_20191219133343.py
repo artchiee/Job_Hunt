@@ -74,7 +74,6 @@ def enter_clear_location():
 # Move on to the secont pa
 locations_lists = []
 
-
 def select_location():
     span_tag = driver.find_element_by_xpath(
         '//*[@id="rb_Location"]/div[1]/span')
@@ -115,8 +114,7 @@ def select_location():
     for links in soup.find_all('div', attrs={'id': 'LOCATION_rbo'}):
         liss = links.find('ul').find('li')
         for lis in liss.find_all('a', href=True):
-            found = lis['href']
-            print("Founded urls : ", found)
+            print("Found url : ", lis['href'], '\n')
 
 
 # call the two functions

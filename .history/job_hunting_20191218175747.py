@@ -1,20 +1,24 @@
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import bs4
 from Scrapp_info import Info_Scrapper
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
 
+
 # defining url
 global start_url
 
-# path for my B.PC
-driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
-
 # indeed url only for 'morocco' jobs
 start_url = "https://indeed.com"
+# define a soup obj
+soup = bs4.BeautifulSoup(urlopen(start_url), 'html.parser')
+
+# path for my B.PC
+driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
 
 # search string
 job_title = str(
@@ -60,7 +64,7 @@ def enter_clear_location():
                 time.sleep(2)
                 location_field.send_keys(Keys.ENTER)
 
-        # if location_field was filled (by default)
+        # if location_field wes filled (by default)
         else:
             location_field.send_keys(Keys.CONTROL + "a")
             location_field.send_keys(Keys.DELETE)
@@ -109,14 +113,15 @@ def select_location():
     #     '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
 
     # using the beautifulsoup to scrap all hrefs
-    # Selenium hands the page to Beautifulsoup
-    # define a soup obj / request
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    for links in soup.find_all('div', attrs={'id': 'LOCATION_rbo'}):
-        liss = links.find('ul').find('li')
-        for lis in liss.find_all('a', href=True):
-            found = lis['href']
-            print("Founded urls : ", found)
+    for links in soup.find('div', {'id': 'LOCATION_rbo'}).findAll('a'):
+        print link['href']
+
+    # enter = input('Location : ')
+    # try:
+    #     if enter in ('aga', 'agadir'):
+    #         l5.click()
+    # except:
+    #     pass
 
 
 # call the two functions

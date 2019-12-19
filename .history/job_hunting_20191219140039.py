@@ -116,7 +116,7 @@ def select_location():
         liss = links.find('ul').find('li')
         for lis in liss.find_all('a', href=True):
             found = lis['href']
-            print("Founded urls : ", found)
+            print(locations_lists.append(found))
 
 
 # call the two functions

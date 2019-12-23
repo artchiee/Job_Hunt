@@ -60,7 +60,7 @@ def enter_clear_location():
                 time.sleep(2)
                 location_field.send_keys(Keys.ENTER)
 
-        # if location_field was filled (by default)
+        # if location_field wes filled (by default)
         else:
             location_field.send_keys(Keys.CONTROL + "a")
             location_field.send_keys(Keys.DELETE)
@@ -109,14 +109,17 @@ def select_location():
     #     '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
 
     # using the beautifulsoup to scrap all hrefs
-    # Selenium hands the page to Beautifulsoup
-    # define a soup obj / request
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
     for links in soup.find_all('div', attrs={'id': 'LOCATION_rbo'}):
         liss = links.find('ul').find('li')
         for lis in liss.find_all('a', href=True):
-            found = lis['href']
-            print("Founded urls : ", found)
+            print("Found url : ", lis['href'], '\n')
+
+    # enter = input('Location : ')
+    # try:
+    #     if enter in ('aga', 'agadir'):
+    #         l5.click()
+    # except:
+    #     pass
 
 
 # call the two functions

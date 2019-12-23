@@ -76,47 +76,48 @@ locations_lists = []
 
 
 def select_location():
-    span_tag = driver.find_element_by_xpath(
-        '//*[@id="rb_Location"]/div[1]/span')
-    # div tag
-    span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
-    # ul tag
-    element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
-    # li tag
-    lists = element.find_elements_by_tag_name('li')
-    print('\n' + 'Locations Available  are : ' + '\n')
-    try:
-        for items in lists:
-            # a tag / # Get locations name
-            a_tag = items.find_element_by_tag_name('a')
-            string = a_tag.get_attribute('title')
-            print('' + ''.join(string))
-    except:
-        raise ValueError('No Available Locations')
+            span_tag = driver.find_element_by_xpath(
+                '//*[@id="rb_Location"]/div[1]/span')
+            # div tag
+            span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
+            # ul tag
+            element = span_tag.find_element_by_xpath(
+                '//*[@id="LOCATION_rbo"]/ul')
+            # li tag
+            lists = element.find_elements_by_tag_name('li')
+                        print('\n' + 'Locations Available  are : ' + '\n')
+                        try:
+                    for items in lists:
+                        # a tag / # Get locations name
+                        a_tag = items.find_element_by_tag_name('a')
+                        string = a_tag.get_attribute('title')
+                        print('' + ''.join(string))
+                except:
+                    raise ValueError('No Available Locations')
 
-    # this list of [l1, l2 /] etc , are location's name aka cities/hrefs
-    # l1 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[1]/a')
-    # l2 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[2]/a')
-    # l3 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[3]/a')
-    # l4 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[4]/a')
-    # l5 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
-    # l6 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
+                # this list of [l1, l2 /] etc , are location's name aka cities/hrefs
+                # l1 = lists.find_element_by_xpath(
+                #     '//*[@id="LOCATION_rbo"]/ul/li[1]/a')
+                # l2 = lists.find_element_by_xpath(
+                #     '//*[@id="LOCATION_rbo"]/ul/li[2]/a')
+                # l3 = lists.find_element_by_xpath(
+                #     '//*[@id="LOCATION_rbo"]/ul/li[3]/a')
+                # l4 = lists.find_element_by_xpath(
+                #     '//*[@id="LOCATION_rbo"]/ul/li[4]/a')
+                # l5 = lists.find_element_by_xpath(
+                #     '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
+                # l6 = lists.find_element_by_xpath(
+                #     '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
 
     # using the beautifulsoup to scrap all hrefs
     # Selenium hands the page to Beautifulsoup
     # define a soup obj / request
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     for links in soup.find_all('div', attrs={'id': 'LOCATION_rbo'}):
-        liss = links.find('ul').find('li')
-        for lis in liss.find_all('a', href=True):
-            found = lis['href']
-            print("Founded urls : ", found)
+            liss = links.find('ul').find('li')
+            for lis in liss.find_all('a', href=True):
+                print("Found url : ", locations_lists.append(
+                    lis.get_attribute['href']))
 
 
 # call the two functions

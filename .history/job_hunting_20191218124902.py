@@ -1,5 +1,4 @@
 import requests
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from Scrapp_info import Info_Scrapper
 import time
@@ -7,18 +6,19 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
 
+
 # defining url
 global start_url
-
-# path for my B.PC
-driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
 
 # indeed url only for 'morocco' jobs
 start_url = "https://indeed.com"
 
+
+# path for my B.PC
+driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
+
 # search string
-job_title = str(
-    input("what job type you looking for?!! :  " + "\n" + 'job : '))
+job_title = str(input("what job type you looking for?!! :  " + "\n"))
 
 # fire (target url)
 driver.get(start_url)
@@ -60,7 +60,7 @@ def enter_clear_location():
                 time.sleep(2)
                 location_field.send_keys(Keys.ENTER)
 
-        # if location_field was filled (by default)
+        # if location_field wes filled (by default)
         else:
             location_field.send_keys(Keys.CONTROL + "a")
             location_field.send_keys(Keys.DELETE)
@@ -70,10 +70,10 @@ def enter_clear_location():
     except:
         Exception()
 
+# Move on to the secont page
 
-# Move on to the secont pa
+
 locations_lists = []
-
 
 def select_location():
     span_tag = driver.find_element_by_xpath(
@@ -84,39 +84,40 @@ def select_location():
     element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
     # li tag
     lists = element.find_elements_by_tag_name('li')
-    print('\n' + 'Locations Available  are : ' + '\n')
+    print(' Locations Available  are : '  + '\n')
+    for items in lists:
+        # a tag / # Get locations name
+        a_tag = items.find_element_by_tag_name('a')
+        string = a_tag.get_attribute('title')
+        print('' + ''.join(string))
     try:
-        for items in lists:
-            # a tag / # Get locations name
-            a_tag = items.find_element_by_tag_name('a')
-            string = a_tag.get_attribute('title')
-            print('' + ''.join(string))
+        # this list of [l1, l2 /] etc , are location's name aka cities/hrefs
+        l1 = lists.find_element_by_xpath(
+                    '//*[@id="LOCATION_rbo"]/ul/li[1]/a')
+        l2 = lists.find_element_by_xpath(
+                    '//*[@id="LOCATION_rbo"]/ul/li[2]/a')
+        l3 = lists.find_element_by_xpath(
+                    '//*[@id="LOCATION_rbo"]/ul/li[3]/a')
+        l4 = lists.find_element_by_xpath(
+                    '//*[@id="LOCATION_rbo"]/ul/li[4]/a')
+        l5 = lists.find_element_by_xpath(
+                    '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
+        l6 = lists.find_element_by_xpath(
+                    '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
+      
+        enter = input('location : ')
+        if enter == 'casa ':
+            casa.click()
+            time.sleep(3)
+            # in casee of a popup aka alert windows (Dismissed it)
+            # Switch to the popup windows & locate it's xpath
+            popup = driver.find_element_by_xpath('//*[@id="popover-close-link"]')
+            popup.click()
+        else:
+            raise ValueError('Error happend !!! ')
+
     except:
-        raise ValueError('No Available Locations')
-
-    # this list of [l1, l2 /] etc , are location's name aka cities/hrefs
-    # l1 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[1]/a')
-    # l2 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[2]/a')
-    # l3 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[3]/a')
-    # l4 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[4]/a')
-    # l5 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
-    # l6 = lists.find_element_by_xpath(
-    #     '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
-
-    # using the beautifulsoup to scrap all hrefs
-    # Selenium hands the page to Beautifulsoup
-    # define a soup obj / request
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    for links in soup.find_all('div', attrs={'id': 'LOCATION_rbo'}):
-        liss = links.find('ul').find('li')
-        for lis in liss.find_all('a', href=True):
-            found = lis['href']
-            print("Founded urls : ", found)
+        Exception()
 
 
 # call the two functions

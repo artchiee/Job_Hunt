@@ -34,6 +34,7 @@ location_input = ''
 
 
 def enter_clear_location():
+    global location_field
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
     try:
@@ -88,31 +89,11 @@ def select_location():
             link = a_tag.get_attribute('href')
             string = a_tag.get_attribute('title')
             all_links.append(link)
-            # Exclude digits whene returning titles
-            import re 
-            new_string = ''.join(re.findall("[a-zA-Z]+", string))
-            all_locations.append(new_string)
+            all_locations.append(string)
         print('urls found : ', all_links, '\n')
-        print('Location\'s\ Lists :' , all_locations, '\n')
+        print('\n Location\'s\ Lists : ' ','.join(all_locations), '\n')
 
-        # Using index to solve the error 
-        choice  = input(str('location  : \n'))
-        for each_location in all_locations:
-            if each_location not  in all_locations:
-                raise ValueError()
-            else:
-                print('found : ',  choice)
-        # matching user input with titles stored in a list
-        # try:
-        #     #Focusing on the element first aka point the Cursor
-        #    # driver.find_element_by_tag_name('body').click()
-        #     choice = input(str('Fethc results by Locatoins : \n'))
-        #     location_field.send_keys(Keys.NULL)
-        #     time.sleep(2)
-        #     location_field.send_keys(choice)
-        #     location_field.send_keys(Keys.ENTER)
-        # except KeyboardInterrupt:
-        #     print('Interrupted')
+        # matching user input with titles stored list
   
     except:
         Exception()

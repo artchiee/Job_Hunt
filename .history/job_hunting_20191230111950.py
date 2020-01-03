@@ -34,8 +34,10 @@ location_input = ''
 
 
 def enter_clear_location():
+    global location_field
     location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
+
     try:
         if location_field == '':
             location_input = str(
@@ -76,46 +78,67 @@ def select_location():
     element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
     # li tag
     lists = element.find_elements_by_tag_name('li')
-    print('all Urls available :  \n ')
+    print('\n' + 'Locations Available  are : ' + '\n')
 
-    # Printing all lists of hrefs / all locations
-    all_links = []
+    # Printing all lists locations
     all_locations = []
     try:
         for items in lists:
             # a tag / # Get locations name
             a_tag = items.find_element_by_tag_name('a')
             link = a_tag.get_attribute('href')
-            string = a_tag.get_attribute('title')
-            all_links.append(link)
-            # Exclude digits whene returning titles
-            import re 
-            new_string = ''.join(re.findall("[a-zA-Z]+", string))
-            all_locations.append(new_string)
-        print('urls found : ', all_links, '\n')
-        print('Location\'s\ Lists :' , all_locations, '\n')
+            all_locations.append(link)
+        print('urls found : ', all_locations, '\n')
+        #     string = a_tag.get_attribute('title')
+        #     all_locations.append(string)
+        # print('\n', ','.join(all_locations), '\n')
 
-        # Using index to solve the error 
-        choice  = input(str('location  : \n'))
-        for each_location in all_locations:
-            if each_location not  in all_locations:
-                raise ValueError()
-            else:
-                print('found : ',  choice)
-        # matching user input with titles stored in a list
-        # try:
-        #     #Focusing on the element first aka point the Cursor
-        #    # driver.find_element_by_tag_name('body').click()
-        #     choice = input(str('Fethc results by Locatoins : \n'))
-        #     location_field.send_keys(Keys.NULL)
-        #     time.sleep(2)
-        #     location_field.send_keys(choice)
-        #     location_field.send_keys(Keys.ENTER)
-        # except KeyboardInterrupt:
-        #     print('Interrupted')
-  
-    except:
-        Exception()
+        # matching user input with titles stored list
+        for each_link in all_locations:
+            # soup  = BeautifulSoup(driver.page_source, 'html.parser')
+            # soup = each_link
+            search = each_link.find('Casablanca')
+            if search:
+                return True
+            return False
+
+    # choice  = input(str('Enter location  :  \n'))
+    # if choice == all_locations:
+    #     print("working ")
+    # else:
+    #     print('Error')
+
+    # retrieving all links of these jobs
+    # spantag
+    # all_links = []
+    # span_tag_ =  driver.find_element_by_xpath('//*[@id="refineresults"]/span')
+    # # div_tag
+    # div_tag  = driver.find_element_by_id('LOCATION_rbo')
+    # ul = div_tag.find_element_by_tag_name('ul')
+    # li  = ul.find_element_by_tag_name('li')
+    # try:
+    #     for links in li.find_elements_by_tag_name('a'):
+    #         link = links.get_attribute('href')
+    #         print('\n', 'Founded Urls : ', all_links.append(link))
+    # except:
+    #     ValueError()
+    # this list of [l1, l2 /] etc , are location's name aka cities/hrefs
+    # l1 = lists.find_element_by_xpath(
+    #     '//*[@id="LOCATION_rbo"]/ul/li[1]/a')
+    # l2 = lists.find_element_by_xpath(
+    #     '//*[@id="LOCATION_rbo"]/ul/li[2]/a')
+    # l3 = lists.find_element_by_xpath(
+    #     '//*[@id="LOCATION_rbo"]/ul/li[3]/a')
+    # l4 = lists.find_element_by_xpath(
+    #     '//*[@id="LOCATION_rbo"]/ul/li[4]/a')
+    # l5 = lists.find_element_by_xpath(
+    #     '//*[@id="LOCATION_rbo"]/ul/li[5]/a')
+    # l6 = lists.find_element_by_xpath(
+    #     '//*[@id="LOCATION_rbo"]/ul/li[6]/a')
+
+    # using the beautifulsoup to scrap all hrefs
+    # Selenium hands the page to Beautifulsoup
+    # define a soup obj / request
 
 
 # call the two functions

@@ -88,20 +88,17 @@ def select_location():
             link = a_tag.get_attribute('href')
             string = a_tag.get_attribute('title')
             all_links.append(link)
-            # Exclude digits whene returning titles
-            import re 
-            new_string = ''.join(re.findall("[a-zA-Z]+", string))
-            all_locations.append(new_string)
+            all_locations.append(string)
         print('urls found : ', all_links, '\n')
-        print('Location\'s\ Lists :' , all_locations, '\n')
 
-        # Using index to solve the error 
-        choice  = input(str('location  : \n'))
-        for each_location in all_locations:
-            if each_location not  in all_locations:
-                raise ValueError()
-            else:
-                print('found : ',  choice)
+        # test here 
+        print(len(all_locations))
+        print(all_locations.index(4))
+        # print('Location\'s\ Lists :' ,  ','.join(all_locations), '\n')
+
+        #test print index from list 
+
+
         # matching user input with titles stored in a list
         # try:
         #     #Focusing on the element first aka point the Cursor

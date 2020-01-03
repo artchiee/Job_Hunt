@@ -88,7 +88,6 @@ def select_location():
             link = a_tag.get_attribute('href')
             string = a_tag.get_attribute('title')
             all_links.append(link)
-            # Exclude digits whene returning titles
             import re 
             new_string = ''.join(re.findall("[a-zA-Z]+", string))
             all_locations.append(new_string)

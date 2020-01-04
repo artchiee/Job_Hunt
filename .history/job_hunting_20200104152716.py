@@ -106,7 +106,7 @@ def select_location():
             # i have to click on a href that contains variable input choice
             href_pattern = re.compile(r"^\=[a-zA-Z]\+&$")
             if choice in search_hrefs:
-                print('found it\'s url : ', choice)
+                print('found it\'s url : ',choice )
             else:
                 print('errro ')
         else:
@@ -123,15 +123,16 @@ def select_location():
 enter_clear_location()
 select_location()
 
-# test here
+# test here 
 
-href = ['https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390',
+import re
+href =  ['https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390',
         'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760']
 href_pattern = re.compile(r"^\=[a-zA-Z]\+&$")
 new_href = list(filter(href_pattern.match, href))
 x = input(str('Something : '))
 for me in href:
     if x in me:
-        print('found url : ', x)
+        print('found url : ' , x)
     else:
         print('error')

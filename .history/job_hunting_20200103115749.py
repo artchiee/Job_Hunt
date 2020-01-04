@@ -6,7 +6,7 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup, SoupStrainer
 from selenium.webdriver.common.keys import Keys
-import re
+
 # defining url
 global start_url
 
@@ -88,33 +88,43 @@ def select_location():
             link = a_tag.get_attribute('href')
             string = a_tag.get_attribute('title')
             all_links.append(link)
-
             # Exclude digits whene returning titles
+            import re
             new_string = ''.join(re.findall("[a-zA-Z]+", string))
             all_locations.append(new_string)
-
         print('urls found : ', all_links, '\n')
         print('Location\'s Lists :', all_locations, '\n')
 
-        # get certain items based on this match
-        choice = input(str('Fetch results by location : \n'))
-        location_pattern = re.compile(r".*[a-zA-Z]")
-        new_return = list(filter(location_pattern.match, all_locations))
-        # click on link(href) based on cities name
-        if choice in new_return:
-            print('You have choosed  : ', choice, '\n')
-            # i have to click on a href that contains variable input choice
-            href_pattern = re.compile(r"^\=[a-zA-Z]\+&$")
-            if choice in search_hrefs:
-                print('found it\'s url : ', choice)
-            else:
-                print('errro ')
-        else:
-            print('Nothing found: \n --Original list : ', all_locations)
+        # Using index to solve the error
+        # matching user input with titles stored in a list
 
         # test this link on user input
-        #casa_location = 'https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390'
+        casa_location = 'https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390'
         #choice  = input(str('location  : \n'))
+
+        try:
+            match = re.compile('[a-zA-Z]+')
+            v = [m.group(0)
+                 for l in all_locations for m in [match.search(l)] if m]
+            if v:
+                casa_location.click()
+            else:
+                print('something went wrong')
+        except Exception:
+            raise ValueError()
+
+        # matching user input with titles stored in a list
+        # try:
+        #     #Focusing on the element first aka point the Cursor
+        #    # driver.find_element_by_tag_name('body').click()
+        #     choice = input(str('Fethc results by Locatoins : \n'))
+        #     location_field.send_keys(Keys.NULL)
+        #     time.sleep(2)
+        #     location_field.send_keys(choice)
+        #     location_field.send_keys(Keys.ENTER)
+        # except KeyboardInterrupt:
+        #     print('Interrupted')
+
     except:
         Exception()
 
@@ -122,16 +132,3 @@ def select_location():
 # call the two functions
 enter_clear_location()
 select_location()
-
-# test here
-
-href = ['https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390',
-        'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760']
-href_pattern = re.compile(r"^\=[a-zA-Z]\+&$")
-new_href = list(filter(href_pattern.match, href))
-x = input(str('Something : '))
-for me in href:
-    if x in me:
-        print('found url : ', x)
-    else:
-        print('error')

@@ -95,22 +95,10 @@ def select_location():
 
         print('urls found : ', all_links, '\n')
         print('Location\'s Lists :', all_locations, '\n')
-
         # get certain items based on this match
-        choice = input(str('Fetch results by location : \n'))
-        location_pattern = re.compile(r".*[a-zA-Z]")
-        new_return = list(filter(location_pattern.match, all_locations))
-        # click on link(href) based on cities name
-        if choice in new_return:
-            print('You have choosed  : ', choice, '\n')
-            # i have to click on a href that contains variable input choice
-            href_pattern = re.compile(r"^\=[a-zA-Z]\+&$")
-            if choice in search_hrefs:
-                print('found it\'s url : ', choice)
-            else:
-                print('errro ')
-        else:
-            print('Nothing found: \n --Original list : ', all_locations)
+        pattern = re.compile(".*C|R")
+        new_return = list(filter(pattern.match, all_locations))
+        print('found : ', new_return)
 
         # test this link on user input
         #casa_location = 'https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390'
@@ -122,16 +110,3 @@ def select_location():
 # call the two functions
 enter_clear_location()
 select_location()
-
-# test here
-
-href = ['https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390',
-        'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760']
-href_pattern = re.compile(r"^\=[a-zA-Z]\+&$")
-new_href = list(filter(href_pattern.match, href))
-x = input(str('Something : '))
-for me in href:
-    if x in me:
-        print('found url : ', x)
-    else:
-        print('error')

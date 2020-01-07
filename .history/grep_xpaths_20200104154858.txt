@@ -17,25 +17,11 @@ popup windows xpath:
 
 # Code works (Keep on this one)
 # use re.search 
-
-
-
- # Code that works 
-
+import re
 hrefs =  ['https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390',
-'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760',
-'https://ma.indeed.com/emplois?q=php&rbl=Agadir&jlid=d8946cbfa6e79760' , 
-'https://ma.indeed.com/emplois?q=php&rbl=Fes&jlid=d8946cbfa6e79760']
-
-s=["Casablanca", "Agadir", "Fes", "Rabat", "Mekenes"]
-
-input_user = input(str('Something : '))
-
-href_pattern = re.compile('=' + input_user + '&jlid')  
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760']
+#s=["Casablanca", "cat", "jhfoillanca", "dfgdsglanca"]
+#x = input(str('Something : '))
+href_pattern = re.compile(r'\^lanca')
 new_href = list(filter(href_pattern.search, hrefs))
-
-if new_href:
-    print('url : ' , new_href)
-else:
-    print('error')
-    
+print(new_href)

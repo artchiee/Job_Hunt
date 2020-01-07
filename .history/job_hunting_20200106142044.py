@@ -98,21 +98,19 @@ def select_location():
 
         # Convert first letter to Uppercase() if user typed it lower
         choice = input(str('Fetch results by location : \n'))
-        convert_choice = (choice.title())
-        if choice != convert_choice:
-            location_pattern = re.compile(convert_choice)
+        convert = (choice.title())
+        if choice != convert:
+            location_pattern = re.compile(convert)
             new_return = list(filter(location_pattern.match, all_locations))
-            print('location after convertion is   : ', new_return)
+            print('location was  : ', new_return)
             # return href that has input user(Location's name)
-            href_pattern = re.compile('=' + convert_choice + '&jlid')
+            href_pattern = re.compile('=' + convert + '&jlid')
             new_href = list(filter(href_pattern.search, all_links))
             # Click on href
-            if new_href:
-                get_link = a_tag.get_attribute('href')
-                print('found match : ', get_link)
-                get_link.click()
+            if choice == new_href:
+                print('found match  : ', choice)
             else:
-                print('unmatch ')
+                print('nothing match  :', all_links)
             # if new_href:
             #     print('url match : ', new_href)
             # else:

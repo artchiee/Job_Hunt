@@ -102,17 +102,15 @@ def select_location():
         if choice != convert_choice:
             location_pattern = re.compile(convert_choice)
             new_return = list(filter(location_pattern.match, all_locations))
-            print('location after convertion is   : ', new_return)
+            print('location was  : ', new_return)
             # return href that has input user(Location's name)
             href_pattern = re.compile('=' + convert_choice + '&jlid')
             new_href = list(filter(href_pattern.search, all_links))
             # Click on href
-            if new_href:
-                get_link = a_tag.get_attribute('href')
-                print('found match : ', get_link)
-                get_link.click()
+            if convert_choice:
+                print('found match  : ', convert_choice)
             else:
-                print('unmatch ')
+                print('nothing match  :', all_links)
             # if new_href:
             #     print('url match : ', new_href)
             # else:

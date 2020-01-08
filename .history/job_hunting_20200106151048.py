@@ -107,12 +107,12 @@ def select_location():
             href_pattern = re.compile('=' + convert_choice + '&jlid')
             new_href = list(filter(href_pattern.search, all_links))
             # Click on href
-            if new_href:
-                get_link = a_tag.get_attribute('href')
-                print('found match : ', get_link)
-                get_link.click()
-            else:
-                print('unmatch ')
+            for new_href in all_links:
+                if new_href:
+                    print('found match  : ', new_href)
+                    new_href.click()
+                else:
+                    print('nothing match  :', all_links)
             # if new_href:
             #     print('url match : ', new_href)
             # else:

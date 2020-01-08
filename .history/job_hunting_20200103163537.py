@@ -92,33 +92,31 @@ def select_location():
             # Exclude digits whene returning titles
             new_string = ''.join(re.findall("[a-zA-Z]+", string))
             all_locations.append(new_string)
-
-        print('urls found : ', all_links, '\n')  # optional delete later
+        print('urls found : ', all_links, '\n')
         print('Location\'s Lists :', all_locations, '\n')
 
-        # Convert first letter to Uppercase() if user typed it lower
-        choice = input(str('Fetch results by location : \n'))
-        convert_choice = (choice.title())
-        if choice != convert_choice:
-            location_pattern = re.compile(convert_choice)
-            new_return = list(filter(location_pattern.match, all_locations))
-            print('location after convertion is   : ', new_return)
-            # return href that has input user(Location's name)
-            href_pattern = re.compile('=' + convert_choice + '&jlid')
-            new_href = list(filter(href_pattern.search, all_links))
-            # Click on href
-            if new_href:
-                get_link = a_tag.get_attribute('href')
-                print('found match : ', get_link)
-                get_link.click()
-            else:
-                print('unmatch ')
-            # if new_href:
-            #     print('url match : ', new_href)
-            # else:
-            #
-        else:
-            print('Your choice was correct : ', choice)
+        # Using index to solve the error
+        # matching user input with titles stored in a list
+
+        # test this link on user input
+        casa_location = 'https://ma.indeed.com/emplois?q=php&rbl=Casablanca&jlid=b2cb1aaecdd05390'
+        #choice  = input(str('location  : \n'))
+        r = re.complie(".*C|R")
+        new_return = list(filter(r.match, all_locations))
+        for match in new_return:
+            print('Found this : ', match)
+
+        # matching user input with titles stored in a list
+        # try:
+        #     #Focusing on the element first aka point the Cursor
+        #    # driver.find_element_by_tag_name('body').click()
+        #     choice = input(str('Fethc results by Locatoins : \n'))
+        #     location_field.send_keys(Keys.NULL)
+        #     time.sleep(2)
+        #     location_field.send_keys(choice)
+        #     location_field.send_keys(Keys.ENTER)
+        # except KeyboardInterrupt:
+        #     print('Interrupted')
 
     except:
         Exception()

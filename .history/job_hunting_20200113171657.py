@@ -161,7 +161,6 @@ def sort_by():
                                   contract_types)
                             #sorting_choice = input(str('Fetch results by Contract : '))
                             # Convert the rendered data to lower
-							
                         except:
                             Exception()
                     else:

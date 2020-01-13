@@ -69,7 +69,7 @@ def enter_clear_location():
         Exception()
 
 
-def sort_by():
+def select_location():
     span_tag = driver.find_element_by_xpath(
         '//*[@id="rb_Location"]/div[1]/span')
     # div tag
@@ -121,15 +121,15 @@ def sort_by():
                 # group() will omit -->  <re.Match object; span=(0, 21)
                 if slice_current_url:
                     clean_url = slice_current_url.group()
-                # new_url = list(filter(slice_current_url.search, current_url))
+                #new_url = list(filter(slice_current_url.search, current_url))
 
                 # this will take form index(22)=emploi until the end
                 print('current url after slicing is  : ', clean_url)
                 for i in new_href:
                     slice_new_href = i[22::]
-                    print('new href after slicing : ', slice_new_href, '\n')
+                    print('new href after slicing : ', slice_new_href,'\n')
 
-                # Combine the Two nw urls
+                # Combine the Two nw urls slice_new_href + clean_url
                 final_url = clean_url + slice_new_href
                 if final_url:
                     time.sleep(3)
@@ -145,28 +145,6 @@ def sort_by():
                     action.move_to_element(popup_dismiss).perform()
                     popup_dismiss.click()
 
-                    # Sorting by available Contract types
-                    # Check first if sorting by job contract exists or not
-                    top_level_tag = driver.find_element_by_id("JOB_TYPE_rbo")
-                    if top_level_tag:
-                        contract_types = []
-                        try:
-                            next_ul = top_level_tag.find_element_by_tag_name(
-                                'ul')
-                            for i in next_ul.find_elements_by_tag_name('li'):
-                                link = i.find_element_by_tag_name('a')
-                                get_title = link.get_attribute('title')
-                                contract_types.append(get_title)
-                            print('Avaialble contract types are : ',
-                                  contract_types)
-                            #sorting_choice = input(str('Fetch results by Contract : '))
-                            # Convert the rendered data to lower
-							
-                        except:
-                            Exception()
-                    else:
-                        print('No Contract Types Available')
-
                 else:
                     print('Invalid Url')
             else:
@@ -178,6 +156,23 @@ def sort_by():
         Exception()
 
 
+# Sort Available Jobs by Contract Types
+def sort_by_contract():
+        # Check first if sorting by job contract exists or not
+    top_level_tag = driver.find_element_by_id("JOB_TYPE_rbo")
+    # extract ul tag
+    contract_types = []
+    try:
+        next_ul = top_level_tag.find_element_by_tag_name('ul')
+        for i in next_ul.find_elements_by_tag_name('li'):
+            link = i.find_element_by_tag_name('a')
+            get_title = link.get_attribute('title')
+        print('Avaialble contract types are : ', get_title)
+    except:
+        print('No Contract types available')
+
+
 # call the two functions
 enter_clear_location()
-sort_by()
+select_location()
+sort_by_contract()

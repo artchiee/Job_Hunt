@@ -156,12 +156,9 @@ def sort_by():
                             for i in next_ul.find_elements_by_tag_name('li'):
                                 link = i.find_element_by_tag_name('a')
                                 get_title = link.get_attribute('title')
-                                contract_types.append(get_title)
-                            print('Avaialble contract types are : ',
-                                  contract_types)
+                            print('Avaialble contract types are : ', get_title)
                             #sorting_choice = input(str('Fetch results by Contract : '))
-                            # Convert the rendered data to lower
-							
+                            #Convert the rendered data to lower
                         except:
                             Exception()
                     else:

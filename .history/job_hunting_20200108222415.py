@@ -108,10 +108,8 @@ def select_location():
             href_pattern = re.compile('=' + converted_choice + '&jlid')
             new_href = list(filter(href_pattern.search, all_links))
 
-            #trying this if it's gunna work 
-            if new_href:
-                get_text = driver.find_element_by_xpath('//*[@title = , converted_choice]')
-                print('found  : ', get_text)
+
+            # Click on href
             #     if new_href:
             #     print('found match : ', new_href)
             #    # get_link.click()

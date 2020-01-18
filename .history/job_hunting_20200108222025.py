@@ -98,20 +98,19 @@ def select_location():
 
         # Convert first letter to Uppercase() if user typed it lower
         choice = input(str('Fetch results by location : \n'))
-        converted_choice = (choice.title())
-        if choice != converted_choice:
-            location_pattern = re.compile(converted_choice)
+        convert_choice = (choice.title())
+        if choice != convert_choice:
+            location_pattern = re.compile(convert_choice)
             new_return = list(filter(location_pattern.match, all_locations))
             print('location after convertion is   : ', new_return)
-
             # return href that has input user(Location's name)
-            href_pattern = re.compile('=' + converted_choice + '&jlid')
+            href_pattern = re.compile('=' + convert_choice + '&jlid')
             new_href = list(filter(href_pattern.search, all_links))
 
-            #trying this if it's gunna work 
-            if new_href:
-                get_text = driver.find_element_by_xpath('//*[@title = , converted_choice]')
-                print('found  : ', get_text)
+            while True:
+                if any(this == convert_choice for this in all_links):
+                    print('found : ' , this)              
+            # Click on href
             #     if new_href:
             #     print('found match : ', new_href)
             #    # get_link.click()

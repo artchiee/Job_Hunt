@@ -36,7 +36,7 @@ languages_links = []
 for i in p.find_elements_by_tag_name('a'):
     fr_language = i.find_element_by_link_text('français')
     if fr_language:
-        fr_href = fr_language.get_attribute('href').click()
+        fr_href  = fr_language.get_attribute('href').click()
         time.sleep(3)
         en_href = i.find_element_by_link_text('English').click()
     else:

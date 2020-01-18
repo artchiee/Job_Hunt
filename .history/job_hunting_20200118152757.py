@@ -34,7 +34,8 @@ div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
 p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
 languages_links = []
 for i in p.find_elements_by_tag_name('a'):
-    fr_language = i.find_element_by_link_text('français')
+    fr_language = i.find_element_by_xpath(
+        '/html/body/div/div[4]/div[1]/bidi/p/a[1]')
     if fr_language:
         fr_href = fr_language.get_attribute('href').click()
         time.sleep(3)

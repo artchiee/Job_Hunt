@@ -9,17 +9,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import re
 
+# path for my chrome(driver)
+driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
+
 # indeed url only for 'morocco' jobs
 global start_url
 start_url = "https://ma.indeed.com"
-
-# Options to force the window's size
-options = webdriver.ChromeOptions()
-options.add_argument("--window-size=2000,5000")
-
-# path for my chrome(driver)
-driver = webdriver.Chrome(
-    "C:\\Users\\footb\\Downloads\\chromedriver", options=options)
 
 # search string
 job_title = str(
@@ -27,22 +22,8 @@ job_title = str(
 
 # fire (target url)
 driver.get(start_url)
-time.sleep(6)
 
-# Switching languages
-div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
-p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
-languages_links = []
-for i in p.find_elements_by_tag_name('a'):
-    fr_language = i.find_element_by_link_text('français')
-    if fr_language:
-        fr_href = fr_language.get_attribute('href').click()
-        time.sleep(3)
-        en_href = i.find_element_by_link_text('English').click()
-    else:
-        Exception()
-
-    # associate the search with indeed search
+# associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
@@ -173,18 +154,7 @@ def sort_by():
                             for i in next_ul.find_elements_by_tag_name('li'):
                                 link = i.find_element_by_tag_name('a')
                                 get_titles = link.get_attribute('title')
-                                contract_types.append(get_titles)
-                            print('Found types : ', contract_types, '\n')
-                            my_type = input(str('Enter sorting type : '))
-                            convert = re.compile(my_type, re.I)
-                            if my_type != convert:
-                                _filter = list(
-                                    filter(convert.search, contract_types))
-                                print('Found : ', _filter)
-                                # take full path for city + job + contract type
-                            else:
-                                print('Nothin Match')
-
+                            print('Found types : ', get_titles)
                             #     titles_only = ''.join(
                             #         re.findall(r"[a-zA-Z]+", get_titles))
                             #     contract_types.append(titles_only)

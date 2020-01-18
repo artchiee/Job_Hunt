@@ -1,0 +1,47 @@
+Lieu xpath : 
+   -- span tag
+//*[@id="rb_Location"]/div[1]/span
+
+div tag
+//*[@id="LOCATION_rbo"]
+
+Location_list :  ul tag 
+//*[@id="LOCATION_rbo"]/ul
+
+a tag of the items ; xpath
+//*[@id="LOCATION_rbo"]/ul/li[1]/a
+#LOCATION_rbo > ul > li:nth-child(1) > a
+
+popup windows xpath: 
+//*[@id="popover-close-link"]
+id = 'popover-close-link'
+
+-- job contract  : //*[@id="rb_Job Type"]/div[1]/span
+
+# Code works (Keep on this one)
+# use re.search 
+ # Code that works 
+
+x = ('cdi', 'cdd')
+ # Ignore case Sensetive/ins..
+#case_sen = re.compile(sorting_choice, re.I)
+if sorting_choice in x:
+    i =  sorting_choice.upper()
+    case_sen = re.compile(i)
+    matchobj = list(filter(case_sen.search, titles))
+    print(matchobj)
+else:
+    print('Nothing Fou')
+     
+
+    #Get match href from contract types
+my_type = input(str('Enter sorting type : '))
+#convert = re.compile(my_type, re.I)
+if my_type:
+    _match = re.compile('=' + my_type)
+    get_match = list(filter(_match.search, hrefs))
+    if get_match:
+        print('found url ' , get_match)
+    else:
+        print('all urls : ', hrefs)
+#fake_mail : (witimen59@teleworm.us)  

@@ -6,20 +6,17 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup, SoupStrainer
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as cond
 from selenium.webdriver.common.action_chains import ActionChains
 import re
+
+# path for my chrome(driver)
+driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
 
 # indeed url only for 'morocco' jobs
 global start_url
 start_url = "https://ma.indeed.com"
-
-# Options to force the window's size
-options = webdriver.ChromeOptions()
-options.add_argument("--window-size=2000,5000")
-
-# path for my chrome(driver)
-driver = webdriver.Chrome(
-    "C:\\Users\\footb\\Downloads\\chromedriver", options=options)
 
 # search string
 job_title = str(
@@ -27,22 +24,8 @@ job_title = str(
 
 # fire (target url)
 driver.get(start_url)
-time.sleep(6)
 
-# Switching languages
-div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
-p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
-languages_links = []
-for i in p.find_elements_by_tag_name('a'):
-    fr_language = i.find_element_by_link_text('français')
-    if fr_language:
-        fr_href = fr_language.get_attribute('href').click()
-        time.sleep(3)
-        en_href = i.find_element_by_link_text('English').click()
-    else:
-        Exception()
-
-    # associate the search with indeed search
+# associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
@@ -151,7 +134,7 @@ def sort_by():
                 if final_url:
                     time.sleep(3)
                     driver.get(final_url)
-                    time.sleep(6)
+                    time.sleep(10)
                     # Dissmiss The popup window if showed
                     action = ActionChains(driver)
                     popup_foreground = driver.find_element_by_xpath(
@@ -172,40 +155,14 @@ def sort_by():
                                 'ul')
                             for i in next_ul.find_elements_by_tag_name('li'):
                                 link = i.find_element_by_tag_name('a')
-                                get_titles = link.get_attribute('title')
-                                contract_types.append(get_titles)
-                            print('Found types : ', contract_types, '\n')
-                            my_type = input(str('Enter sorting type : '))
-                            convert = re.compile(my_type, re.I)
-                            if my_type != convert:
-                                _filter = list(
-                                    filter(convert.search, contract_types))
-                                print('Found : ', _filter)
-                                # take full path for city + job + contract type
-                            else:
-                                print('Nothin Match')
-
-                            #     titles_only = ''.join(
-                            #         re.findall(r"[a-zA-Z]+", get_titles))
-                            #     contract_types.append(titles_only)
-                            # print('Avaialble contract types are : ',
-                            #       contract_types, '\n')
-                            # sorting_choice = input(
-                            #     str('Fetch results by Contract : '))
-                            # # Ignore case Sensetive/ins..
-                            # exception = ('cdi', 'cdd')
-                            # if sorting_choice in exception:
-                            #     convert = sorting_choice.upper()
-                            #     case_sen = re.compile(convert, flags=re.IGNORECASE)
-                            #     matchobj = list(
-                            #         filter(case_sen.search, titles_only))
-                            #     print('Found : ', matchobj)
-                            # else:
-                            #     print('Nothing Found..')
+                                get_title = link.get_attribute('title')
+                                print('Avaialble contract types are : ', get_title)
+                                #sorting_choice = input(str('Fetch results by Contract : '))
+                                # Convert the rendered data to lower
                         except:
                             Exception()
-                    else:
-                        print('No Contract Types Available')
+                        else:
+                            print('No Contract Types Available')
 
                 else:
                     print('Invalid Url')

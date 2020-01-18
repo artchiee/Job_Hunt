@@ -30,17 +30,26 @@ driver.get(start_url)
 time.sleep(6)
 
 # Switching languages
-div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
-p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
+p = driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/bidi/p')
+a = p.find_element_by_tag_name('a')
 languages_links = []
-for i in p.find_elements_by_tag_name('a'):
-    fr_language = i.find_element_by_link_text('français')
+for i in a:
+    fr_language = driver.find_element_by_link_text('français')
     if fr_language:
-        fr_href = fr_language.get_attribute('href').click()
+        languages_links.append(fr_language.get_attribute('href'))
         time.sleep(3)
-        en_href = i.find_element_by_link_text('English').click()
+        print('found  : ', languages_links)
+        # fr_link.click()
+        # time.sleep(3)
+        # en_language = driver.find_element_by_link_text('English')
+        # en_link = en_language.get_attribute('href')
+        # en_link.click()
     else:
         Exception()
+        # fr_link = fr_language.get_attribute('href')
+        # fr_link.click()
+        # en_link = en_language.get_attribute('href')
+        # en_link.click()
 
     # associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')

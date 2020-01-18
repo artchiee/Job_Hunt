@@ -6,20 +6,17 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup, SoupStrainer
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as cond
 from selenium.webdriver.common.action_chains import ActionChains
 import re
+
+# path for my chrome(driver)
+driver = webdriver.Chrome("C:\\Users\\footb\\Downloads\\chromedriver")
 
 # indeed url only for 'morocco' jobs
 global start_url
 start_url = "https://ma.indeed.com"
-
-# Options to force the window's size
-options = webdriver.ChromeOptions()
-options.add_argument("--window-size=2000,5000")
-
-# path for my chrome(driver)
-driver = webdriver.Chrome(
-    "C:\\Users\\footb\\Downloads\\chromedriver", options=options)
 
 # search string
 job_title = str(
@@ -27,22 +24,8 @@ job_title = str(
 
 # fire (target url)
 driver.get(start_url)
-time.sleep(6)
 
-# Switching languages
-div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
-p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
-languages_links = []
-for i in p.find_elements_by_tag_name('a'):
-    fr_language = i.find_element_by_link_text('français')
-    if fr_language:
-        fr_href = fr_language.get_attribute('href').click()
-        time.sleep(3)
-        en_href = i.find_element_by_link_text('English').click()
-    else:
-        Exception()
-
-    # associate the search with indeed search
+# associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
@@ -86,7 +69,7 @@ def enter_clear_location():
         Exception()
 
 
-def sort_by():
+def select_location():
     span_tag = driver.find_element_by_xpath(
         '//*[@id="rb_Location"]/div[1]/span')
     # div tag
@@ -138,74 +121,26 @@ def sort_by():
                 # group() will omit -->  <re.Match object; span=(0, 21)
                 if slice_current_url:
                     clean_url = slice_current_url.group()
-                # new_url = list(filter(slice_current_url.search, current_url))
+                #new_url = list(filter(slice_current_url.search, current_url))
 
                 # this will take form index(22)=emploi until the end
                 print('current url after slicing is  : ', clean_url)
                 for i in new_href:
                     slice_new_href = i[22::]
-                    print('new href after slicing : ', slice_new_href, '\n')
+                    print('new href after slicing : ', slice_new_href)
 
-                # Combine the Two nw urls
+                # Combine the Two nw urls slice_new_href + clean_url
                 final_url = clean_url + slice_new_href
                 if final_url:
                     time.sleep(3)
                     driver.get(final_url)
-                    time.sleep(6)
-                    # Dissmiss The popup window if showed
-                    action = ActionChains(driver)
-                    popup_foreground = driver.find_element_by_xpath(
-                        '//*[@id="popover-foreground"]')
-                    action.move_to_element(popup_foreground).perform()
-                    popup_dismiss = driver.find_element_by_xpath(
-                        '//*[@id="popover-close-link"]')
-                    action.move_to_element(popup_dismiss).perform()
-                    popup_dismiss.click()
-
-                    # Sorting by available Contract types
-                    # Check first if sorting by job contract exists or not
-                    top_level_tag = driver.find_element_by_id("JOB_TYPE_rbo")
-                    if top_level_tag:
-                        contract_types = []
-                        try:
-                            next_ul = top_level_tag.find_element_by_tag_name(
-                                'ul')
-                            for i in next_ul.find_elements_by_tag_name('li'):
-                                link = i.find_element_by_tag_name('a')
-                                get_titles = link.get_attribute('title')
-                                contract_types.append(get_titles)
-                            print('Found types : ', contract_types, '\n')
-                            my_type = input(str('Enter sorting type : '))
-                            convert = re.compile(my_type, re.I)
-                            if my_type != convert:
-                                _filter = list(
-                                    filter(convert.search, contract_types))
-                                print('Found : ', _filter)
-                                # take full path for city + job + contract type
-                            else:
-                                print('Nothin Match')
-
-                            #     titles_only = ''.join(
-                            #         re.findall(r"[a-zA-Z]+", get_titles))
-                            #     contract_types.append(titles_only)
-                            # print('Avaialble contract types are : ',
-                            #       contract_types, '\n')
-                            # sorting_choice = input(
-                            #     str('Fetch results by Contract : '))
-                            # # Ignore case Sensetive/ins..
-                            # exception = ('cdi', 'cdd')
-                            # if sorting_choice in exception:
-                            #     convert = sorting_choice.upper()
-                            #     case_sen = re.compile(convert, flags=re.IGNORECASE)
-                            #     matchobj = list(
-                            #         filter(case_sen.search, titles_only))
-                            #     print('Found : ', matchobj)
-                            # else:
-                            #     print('Nothing Found..')
-                        except:
-                            Exception()
-                    else:
-                        print('No Contract Types Available')
+					# Dissmiss The popup window if showed
+					action = ActionChains(driver)
+					popup_foreground = driver.find_element_by_xpath('//*[@id="popover-foreground"]')
+					action.move_to_element(popup_foreground).perform()
+					popup_dismiss = driver.find_element_by_xpath('//*[@id="popover-close-link"]')
+					action.move_to_element(popup_dismiss).perform()
+					popup_dismiss.click()
 
                 else:
                     print('Invalid Url')
@@ -220,4 +155,4 @@ def sort_by():
 
 # call the two functions
 enter_clear_location()
-sort_by()
+select_location()

@@ -34,13 +34,9 @@ div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
 p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
 languages_links = []
 for i in p.find_elements_by_tag_name('a'):
-    fr_language = i.find_element_by_link_text('français')
-    if fr_language:
-        fr_href = fr_language.get_attribute('href').click()
-        time.sleep(3)
-        en_href = i.find_element_by_link_text('English').click()
-    else:
-        Exception()
+    #fr_language = i.find_element_by_link_text('français')
+    languages_links.append(i.get_attribute('href'))
+print('Urls found are : ', languages_links)
 
     # associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')

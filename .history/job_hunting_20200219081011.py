@@ -59,7 +59,7 @@ location_input = ''
 
 def enter_clear_location():
     # Handling two cases of filtering
-    location_field = driver.find_element_by_xpath(  
+    location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
     try:
         if location_field == '':
@@ -96,12 +96,11 @@ def enter_clear_location():
 def sort_by():
     # Need to handle standard search and dropdown search
     # Dropdown list div tag 
-    dropdown_filter = driver.find_element_by_id('jobsearch_nav_body')
+    dropdown_filter = driver.find_element_by_class_name('filters')
 
     # Do this if (dropdown_filter) doesn't exists
     print('Size is ', dropdown_filter.size)
-    '''
-    if dropdown_filter.size == 0:
+    if dropdown_filter.size() < 0:
         # For standard search
         span_tag = driver.find_element_by_xpath(
             '//*[@id="rb_Location"]/div[1]/span')
@@ -239,7 +238,7 @@ def sort_by():
             data = scrapp.get_attribute('title')
             drop_location.append(data)
         print('Search found : ', drop_location)
-'''
+
 # call the two functions
 enter_clear_location()
 sort_by()

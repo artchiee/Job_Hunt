@@ -59,7 +59,7 @@ location_input = ''
 
 def enter_clear_location():
     # Handling two cases of filtering
-    location_field = driver.find_element_by_xpath(  
+    location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
     try:
         if location_field == '':

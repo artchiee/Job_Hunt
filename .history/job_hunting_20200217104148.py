@@ -15,7 +15,7 @@ start_url = "https://ma.indeed.com"
 
 # Options to force the window's size
 options = webdriver.ChromeOptions()
-options.add_argument("--window-size=1060,810")  # right n for the width
+options.add_argument("--window-size=1060,810") #right n for the width
 
 # path for my chrome(driver)
 driver = webdriver.Chrome(
@@ -47,19 +47,18 @@ driver.get(start_url)
 #     else:
 #         Exception()
 
-   # associate the search with indeed search
+    # associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
 global location_input
 global location_field
 location_field = ''
-location_input = ''
+location_input = ''     
 
 
 def enter_clear_location():
-    # Handling two cases of filtering
-    location_field = driver.find_element_by_xpath(  
+    location_field = driver.find_element_by_xpath(
         '//*[@id="text-input-where"]')
     try:
         if location_field == '':
@@ -87,35 +86,26 @@ def enter_clear_location():
             location_field.send_keys(Keys.DELETE)
             time.sleep(2)
             location_field.send_keys(Keys.ENTER)
-            time.sleep(10)
 
     except:
         Exception()
 
 
 def sort_by():
-    # Need to handle standard search and dropdown search
-    # Dropdown list div tag 
-    dropdown_filter = driver.find_element_by_id('jobsearch_nav_body')
+    span_tag = driver.find_element_by_xpath(
+        '//*[@id="rb_Location"]/div[1]/span')
+    # div tag
+    span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
+    # ul tag
+    element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
+    # li tag
+    lists = element.find_elements_by_tag_name('li')
+    print('all Urls available :  \n ')
 
-    # Do this if (dropdown_filter) doesn't exists
-    print('Size is ', dropdown_filter.size)
-    '''
-    if dropdown_filter.size == 0:
-        # For standard search
-        span_tag = driver.find_element_by_xpath(
-            '//*[@id="rb_Location"]/div[1]/span')
-        # div tag
-        span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
-        # ul tag
-        element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
-        # li tag
-        lists = element.find_elements_by_tag_name('li')
-        print('all Urls available :  \n ')
-
-        # Printing all lists of hrefs / all locations
-        all_links = []
-        all_locations = []
+    # Printing all lists of hrefs / all locations
+    all_links = []
+    all_locations = []
+    try:
         for items in lists:
             # a tag / # Get locations name
             a_tag = items.find_element_by_tag_name('a')
@@ -135,8 +125,7 @@ def sort_by():
         convert_choice = (choice.title())
         if choice != convert_choice:
             location_pattern = re.compile(convert_choice)
-            new_return = list(
-                filter(location_pattern.match, all_locations))
+            new_return = list(filter(location_pattern.match, all_locations))
             print('location after convertion is   : ', new_return)
 
             # return href that has input user(Location's name)
@@ -160,8 +149,7 @@ def sort_by():
                 print('current url after slicing is  : ', clean_url)
                 for i in new_href:
                     slice_new_href = i[22::]
-                    print('new href after slicing : ',
-                            slice_new_href, '\n')
+                    print('new href after slicing : ', slice_new_href, '\n')
 
                 # Combine the Two nw urls
                 final_url = clean_url + slice_new_href
@@ -181,45 +169,36 @@ def sort_by():
 
                     # Sorting by available Contract types
                     # Check first if sorting by job contract exists or not
-                    top_level_tag = driver.find_element_by_id(
-                        "JOB_TYPE_rbo")
+                    top_level_tag = driver.find_element_by_id("JOB_TYPE_rbo")
                     if top_level_tag:
                         contract_types = []
                         contracts_href = []
                         try:
                             next_ul = top_level_tag.find_element_by_tag_name(
                                 'ul')
-                            for i in next_ul.find_elements_by_tag_name('li'):
+                            for i in next_ul.find_elements_by_tag_name  ('li'):
                                 link = i.find_element_by_tag_name('a')
-                                # For getting all hrefs
+                                # For getting all hrefs 
                                 get_titles = link.get_attribute('title')
-                                get_hrefs = link.get_attribute('href')
                                 contract_types.append(get_titles)
-                                contracts_href.append(get_hrefs)
                             print('Found types : ', contract_types, '\n')
-
-                            # Will be deleted later
-                            print(' COntracts Urls : ',
-                                    contracts_href, '\n')
-                            my_type = input(
-                                str('Enter Contract sorting type : '))
+                            my_type = input(str('Enter Contract sorting type : '))
 
                             # Making dic to hundle frensh language cases
                             dic = {
                                 'CDI': 'permanent', 'Intréim': 'temporary', 'Temp plein': 'full time',
                                 'Stage': 'internship', 'Freelance / Ind�pendant': 'subcontract', 'CDD': 'contract',
-                                'Temp partiel': 'parttime','Apprentissage / Alternance':'apprenticeship'
+                                'Temp partiel':'parttime','Apprentissage / Alternance':'apprenticeship'
                             }
-                            # match user input against dic.values to get the url
+                            #match user input against dic.values to get the url
                             for key, value in dic.items():
                                 if key == my_type:
                                     print('match is : ', value)
                                 else:
-                                    print(
-                                        'key Error --> Try full Upper case')
+                                    print('key Error --> Try full Upper case')
 
                                 # get the link and procced
-
+                                                        
                         except:
                             Exception()
                     else:
@@ -229,17 +208,13 @@ def sort_by():
                     print('Invalid Url')
             else:
                 print('Nothing Match Your title in hrefs list  !!')
-    else:
-        # In case we have dropdown filtering    
-        drop_location = []
-        span_id = driver.find_element_by_id('filter-location')
-        dropdown_ul = span_id.find_element_by_tag_name('ul')
-        for my_lists in dropdown_ul.find_elements_by_tag_name('li'):
-            scrapp = my_lists.find_element_by_tag_name('a')
-            data = scrapp.get_attribute('title')
-            drop_location.append(data)
-        print('Search found : ', drop_location)
-'''
+        else:
+            print('Your choice was correct : ', choice)
+
+    except:
+        Exception()
+
+
 # call the two functions
 enter_clear_location()
 sort_by()

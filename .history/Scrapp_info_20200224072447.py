@@ -2,7 +2,7 @@
 # Creating a class  and identifiying the needs  :
 
 
-class Info_Scrapper:
+class data:
     def __init__(self, job, location):
         self.job = job
         self.location = location

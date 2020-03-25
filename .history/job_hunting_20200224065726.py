@@ -1,7 +1,7 @@
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from Scrapp_info import data
+from Scrapp_info import Info_Scrapper
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup, SoupStrainer
@@ -143,13 +143,12 @@ def sort_by():
                 # Copy this link to (indeed) url section
                 current_url = driver.current_url
                 print('Current url running :  ', current_url, '\n')
-
+                
                 # will use this variable in another place
-                global_pattern = r'https://\w+\.\w+\.com/'
-                slice_current_url = re.search(
-                    global_pattern, current_url)  # /\w+\?\w*\=\w+&\w*\=
+                global_pattern  =  r'https://\w+\.\w+\.com/'
+                slice_current_url = re.search(global_pattern, current_url) # /\w+\?\w*\=\w+&\w*\=
                 # group() will omit -->  <re.Match object; span=(0, 21)
-                if slice_current_url:
+                if slice_current_url:   
                     clean_url = slice_current_url.group()
                 # new_url = list(filter(slice_current_url.search, current_url))
 
@@ -158,7 +157,7 @@ def sort_by():
                 for i in new_href:
                     slice_new_href = i[22::]
                     print('new href after slicing : ',
-                          slice_new_href, '\n')
+                          slice_new_href, '\n') 
 
                 # Combine the Two nw urls
                 final_url = clean_url + slice_new_href
@@ -214,20 +213,18 @@ def sort_by():
                                         print('match is : ', value)
                                         # Get matched link and
                                         find_url = re.compile('jt=' + value)
-                                        found = list(
-                                            filter(find_url.search, contracts_href))
-                                        print('url match is : ', found)
+                                        found = list(filter('url match is :', find_url))
                                         # Next to slice url match   (emploi..)
-                                        # must be done with regex later
-                                        for i in found:
+                                        # must be done with regex later 
+                                        for i in find_url:
                                             mid_url = i[22::]
                                             print('mid url is : ', mid_url)
                                             if mid_url:
-                                                use_this = clean_url + mid_url
+                                                use_this = global_pattern + mid_url
                                                 driver.get(use_this)
                                                 time.sleep(5)
-                                except:
-                                    print('exception')
+                                    except:
+                                        print('exception')
                         except:
                             Exception()
                     else:
@@ -240,7 +237,7 @@ def sort_by():
     else:
         print('somthing here')
         # logic if dropdown filter wwas giving
-
+        
         # # In case we have dropdown filtering
         # drop_location = []
         # span_id = driver.find_element_by_id('filter-location')
@@ -250,11 +247,6 @@ def sort_by():
         #     data = scrapp.get_attribute('title')
         #     drop_location.append(data)
         # print('Search found : ', drop_location)
-
-#def save_job():
-
-#  loop through 5 pages max if exists 
-# and save the jobs to json file
 
 
 # call the two functions

@@ -2,5 +2,4 @@
 /env
 .vscode/
 *.log
-/xpaths.txt
-/junk_code.py
+*.txt

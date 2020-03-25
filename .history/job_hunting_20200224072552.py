@@ -251,10 +251,7 @@ def sort_by():
         #     drop_location.append(data)
         # print('Search found : ', drop_location)
 
-#def save_job():
-
-#  loop through 5 pages max if exists 
-# and save the jobs to json file
+def save_job():
 
 
 # call the two functions

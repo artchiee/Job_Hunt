@@ -1,7 +1,7 @@
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from Scrapp_info import data
+from Scrapp_info import Info_Scrapper
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup, SoupStrainer
@@ -47,7 +47,7 @@ driver.get(start_url)
 #     else:
 #         Exception()
 
-# associate the search with indeed search
+   # associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
 job_field.send_keys(job_title)
 
@@ -59,7 +59,7 @@ location_input = ''
 
 def enter_clear_location():
     # Handling two cases of filtering
-    location_field = driver.find_element_by_xpath(
+    location_field = driver.find_element_by_xpath(  
         '//*[@id="text-input-where"]')
     try:
         if location_field == '':
@@ -95,9 +95,14 @@ def enter_clear_location():
 
 def sort_by():
     # Need to handle standard search and dropdown search
+    # Dropdown list div tag 
+    dropdown_filter = driver.find_element_by_id('jobsearch_nav_body')
 
     # Do this if (dropdown_filter) doesn't exists
-    if not driver.find_elements_by_class_name('filter'):
+    print('Size is ', dropdown_filter.size)
+    '''
+    if dropdown_filter.size == 0:
+        # For standard search
         span_tag = driver.find_element_by_xpath(
             '//*[@id="rb_Location"]/div[1]/span')
         # div tag
@@ -144,21 +149,19 @@ def sort_by():
                 current_url = driver.current_url
                 print('Current url running :  ', current_url, '\n')
 
-                # will use this variable in another place
-                global_pattern = r'https://\w+\.\w+\.com/'
                 slice_current_url = re.search(
-                    global_pattern, current_url)  # /\w+\?\w*\=\w+&\w*\=
+                    r'https://\w+\.\w+\.com/', current_url)  # /\w+\?\w*\=\w+&\w*\=
                 # group() will omit -->  <re.Match object; span=(0, 21)
                 if slice_current_url:
                     clean_url = slice_current_url.group()
                 # new_url = list(filter(slice_current_url.search, current_url))
 
-                # this will take form index(22)='emploi' until the end
+                # this will take form index(22)=emploi until the end
                 print('current url after slicing is  : ', clean_url)
                 for i in new_href:
                     slice_new_href = i[22::]
                     print('new href after slicing : ',
-                          slice_new_href, '\n')
+                            slice_new_href, '\n')
 
                 # Combine the Two nw urls
                 final_url = clean_url + slice_new_href
@@ -197,7 +200,7 @@ def sort_by():
 
                             # Will be deleted later
                             print(' COntracts Urls : ',
-                                  contracts_href, '\n')
+                                    contracts_href, '\n')
                             my_type = input(
                                 str('Enter Contract sorting type : '))
 
@@ -205,29 +208,18 @@ def sort_by():
                             dic = {
                                 'CDI': 'permanent', 'Intréim': 'temporary', 'Temp plein': 'full time',
                                 'Stage': 'internship', 'Freelance / Ind�pendant': 'subcontract', 'CDD': 'contract',
-                                'Temp partiel': 'parttime', 'Apprentissage / Alternance': 'apprenticeship'
+                                'Temp partiel': 'parttime','Apprentissage / Alternance':'apprenticeship'
                             }
                             # match user input against dic.values to get the url
                             for key, value in dic.items():
-                                try:
-                                    if key == my_type:
-                                        print('match is : ', value)
-                                        # Get matched link and
-                                        find_url = re.compile('jt=' + value)
-                                        found = list(
-                                            filter(find_url.search, contracts_href))
-                                        print('url match is : ', found)
-                                        # Next to slice url match   (emploi..)
-                                        # must be done with regex later
-                                        for i in found:
-                                            mid_url = i[22::]
-                                            print('mid url is : ', mid_url)
-                                            if mid_url:
-                                                use_this = clean_url + mid_url
-                                                driver.get(use_this)
-                                                time.sleep(5)
-                                except:
-                                    print('exception')
+                                if key == my_type:
+                                    print('match is : ', value)
+                                else:
+                                    print(
+                                        'key Error --> Try full Upper case')
+
+                                # get the link and procced
+
                         except:
                             Exception()
                     else:
@@ -238,25 +230,16 @@ def sort_by():
             else:
                 print('Nothing Match Your title in hrefs list  !!')
     else:
-        print('somthing here')
-        # logic if dropdown filter wwas giving
-
-        # # In case we have dropdown filtering
-        # drop_location = []
-        # span_id = driver.find_element_by_id('filter-location')
-        # dropdown_ul = span_id.find_element_by_tag_name('ul')
-        # for my_lists in dropdown_ul.find_elements_by_tag_name('li'):
-        #     scrapp = my_lists.find_element_by_tag_name('a')
-        #     data = scrapp.get_attribute('title')
-        #     drop_location.append(data)
-        # print('Search found : ', drop_location)
-
-#def save_job():
-
-#  loop through 5 pages max if exists 
-# and save the jobs to json file
-
-
+        # In case we have dropdown filtering    
+        drop_location = []
+        span_id = driver.find_element_by_id('filter-location')
+        dropdown_ul = span_id.find_element_by_tag_name('ul')
+        for my_lists in dropdown_ul.find_elements_by_tag_name('li'):
+            scrapp = my_lists.find_element_by_tag_name('a')
+            data = scrapp.get_attribute('title')
+            drop_location.append(data)
+        print('Search found : ', drop_location)
+'''
 # call the two functions
 enter_clear_location()
 sort_by()

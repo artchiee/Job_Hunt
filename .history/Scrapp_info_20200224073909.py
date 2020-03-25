@@ -7,5 +7,3 @@ class data:
         self.job_name = job_name
         self.job_location = job_location
         self.job_url = job_url
-
-    # Need to serialize this class before saving

@@ -22,7 +22,7 @@ xpath : //*[@id="whatWhere"]/div/div/form/div[3]/button
         if location_field == '':
             location_input = str(input  
                              ("Do you want to give location or proccede to see all available jobs  ???" + "\n"))
-
+ 
             answer_me = str(input(' Yes --> give location' +
                               ' |||' + 'No --> See all' + '\n'))
 
@@ -146,3 +146,51 @@ xpath : //*[@id="whatWhere"]/div/div/form/div[3]/button
     # using the beautifulsoup to scrap all hrefs
     # Selenium hands the page to Beautifulsoup
     # define a soup obj / request
+
+    ------------------------------------------------------
+    '''
+
+                            Online Python Compiler.
+                Code, Compile, Run and Debug python program online.
+Write your code in this editor and press "Run" button to execute it.
+
+'''
+
+import re 
+
+
+
+urls =  ['https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=permanent',  
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=temporary',
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=internship',
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=fulltime', 
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=contract',
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=apprenticeship',
+'https://ma.indeed.com/emplois?q=php&rbl=Rabat&jlid=d8946cbfa6e79760&jt=subcontract']
+
+take  = r'https://\w+\.\w+\.com/'
+slice_current_url = re.search(take, urls) 
+print (slice_current_url )
+
+
+
+'''
+my_type = input(str('Type in : '))
+dic = {
+        'CDI': 'permanent', 'Intréim': 'temporary', 'Temp plein': 'full time',
+        'Stage': 'internship', 'Freelance / Ind�pendant': 'subcontract', 'CDD': 'contract',
+        'Temp partiel': 'parttime', 'Apprentissage / Alternance': 'apprenticeship'
+    }
+# match user input against dic.values to get the url
+for key, value in dic.items():
+    if key == my_type:
+        print('match is :', value)
+        print('****'*30)
+        # Get matched link and proceed
+        
+        match  = re.compile(r'jt=' + value)
+        found = list(filter(match.search, urls))
+        # remove QOUAts befor you print
+        print('urls  : ',[l.strip('.') for l in found])
+'''
+    

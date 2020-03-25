@@ -194,3 +194,7 @@ for key, value in dic.items():
         print('urls  : ',[l.strip('.') for l in found])
 '''
     
+    --------------------------------------------
+    id results for jobs to save 
+    td id = "resultsCol"  //*[@id="resultsCol"]
+    div inside this td  = //*[@id="p_2e60913ef230a28e"]  //*[@id="p_b7d1993f5bc1e228"]

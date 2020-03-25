@@ -1,10 +1,6 @@
-import requests
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 from Scrapp_info import data
 import time
 from selenium import webdriver
-from bs4 import BeautifulSoup, SoupStrainer
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import re
@@ -28,7 +24,6 @@ job_title = str(
 # fire (target url)
 driver.get(start_url)
 # time.sleep(3)
-# html = driver.find_element_by_tag_name('html')
 # html.send_keys(Keys.END)
 # time.sleep(3)
 
@@ -94,7 +89,7 @@ def enter_clear_location():
 
 
 def sort_by():
-    # Need to handle standard search and dropdown search
+    # Need to handle standard search and dropdown searchw²
 
     # Do this if (dropdown_filter) doesn't exists
     if not driver.find_elements_by_class_name('filter'):
@@ -103,6 +98,7 @@ def sort_by():
         # div tag
         span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]')
         # ul tag
+
         element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
         # li tag
         lists = element.find_elements_by_tag_name('li')
@@ -232,7 +228,6 @@ def sort_by():
                             Exception()
                     else:
                         print('No Contract Types Available')
-
                 else:
                     print('Invalid Url')
             else:
@@ -251,12 +246,49 @@ def sort_by():
         #     drop_location.append(data)
         # print('Search found : ', drop_location)
 
-#def save_job():
 
-#  loop through 5 pages max if exists 
-# and save the jobs to json file
+def save_jobs():
+    # i set this to loop through 7 pages max // will handle the pages later
+    #pages_to_loop_through = 7
+    page = 1
+    word = 'Suivant&nbsp'  # = Next
+    try:
+        print(' page number is ', page)
+        job_titles = []
+        results_col = driver.find_element_by_xpath('//*[@id="resultsCol"]')
+        all_rs = results_col.find_elements_by_class_name(
+            'jobsearch-SerpJobCard')
+        # loop throug all these results
+        for i in all_rs:
+            title_name = i.find_element_by_tag_name('div')
+            title_link = title_name.find_element_by_tag_name(
+                'a').text
+            job_titles.append(title_link)
+        print('\n Job names in this page are : ', job_titles)
+        # Loop through pages
+        # start by looking for the variablr word if exists
+        time.sleep(5)
+        html = driver.find_element_by_tag_name('html')
+        html.send_keys(Keys.END)
+        pagination = results_col.find_element_by_xpath(
+            '//div[25]/a[3]/span/span').text
+        print("text is ", pagination)
+        if word in pagination:
+            next_link = results_col.find_element_by_xpath(
+                '//div[25]/a[3]').get_attribute('href')
+            print('next link will be  :',  next_link)
+            next_link.click()
+            page = page + 1
+        else:
+            print('no other pages available; all job titles has been scrapped')
+
+    except:
+        Exception()
+
+    # Saving the data into a json file
 
 
-# call the two functions
+# Functions call
 enter_clear_location()
 sort_by()
+save_jobs()

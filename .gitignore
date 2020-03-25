@@ -3,4 +3,5 @@
 .vscode/
 *.log
 /xpaths.txt
+/tempCodeRunnerFile.py
 /junk_code.py

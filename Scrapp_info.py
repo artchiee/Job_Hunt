@@ -8,4 +8,14 @@ class data:
         self.job_location = job_location
         self.job_url = job_url
 
-    # Need to serialize this class before saving
+    def serialize(self):
+        return {
+            'job_name': self.job_name,
+            'job_location': self.job_location,
+            'job_url': self.job_url
+        }
+
+    def from_json(self, json_):
+        self.job_name = json_["job_name"]
+        self.job_location = json_["job_location"]
+        self.job_url = json_["job_url"]

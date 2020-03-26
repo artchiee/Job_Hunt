@@ -4,7 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import re
-import json
 
 # indeed url only for 'morocco' jobs
 global start_url
@@ -24,6 +23,24 @@ job_title = str(
 
 # fire (target url)
 driver.get(start_url)
+# time.sleep(3)
+# html.send_keys(Keys.END)
+# time.sleep(3)
+
+# Switching languages
+# div = driver.find_element_by_xpath('/html/body/div/div[6]/div[1]')
+# p = div.find_element_by_xpath('/html/body/div/div[6]/div[1]/bidi/p')
+# languages_links = []
+# for i in p.find_elements_by_tag_name('a'):
+#     fr_language = i.find_element_by_link_text('français')
+#     fr_language.casefold()
+#     if fr_language:
+#         fr_href = fr_language.get_attribute('href')
+#         print('french url : ', fr_href)
+#         # time.sleep(3)
+#         # en_href = i.find_element_by_link_text('English').click()
+#     else:
+#         Exception()
 
 # associate the search with indeed search
 job_field = driver.find_element_by_xpath('//*[@id="text-input-what"]')
@@ -85,7 +102,7 @@ def sort_by():
         element = span_tag.find_element_by_xpath('//*[@id="LOCATION_rbo"]/ul')
         # li tag
         lists = element.find_elements_by_tag_name('li')
-        #print('all Urls available :  \n ')
+        print('all Urls available :  \n ')
 
         # Printing all lists of hrefs / all locations
         all_links = []
@@ -101,7 +118,7 @@ def sort_by():
             new_string = ''.join(re.findall("[a-zA-Z]+", string))
             all_locations.append(new_string)
 
-        # print('urls found : ', all_links, '\n')  # optional delete later
+        print('urls found : ', all_links, '\n')  # optional delete later
         print('Location\'s Lists :', all_locations, '\n')
 
         # Convert first letter to Uppercase() if user typed it lower
@@ -118,6 +135,8 @@ def sort_by():
             # link match retrieved
             new_href = list(filter(href_pattern.search, all_links))
             if new_href:
+                print('url match !!  : ', new_href, '\n')
+                # Copy this link to (indeed) url section
                 current_url = driver.current_url
                 print('Current url running :  ', current_url, '\n')
 
@@ -128,10 +147,15 @@ def sort_by():
                 # group() will omit -->  <re.Match object; span=(0, 21)
                 if slice_current_url:
                     clean_url = slice_current_url.group()
+                # new_url = list(filter(slice_current_url.search, current_url))
 
                 # this will take form index(22)='emploi' until the end
+                print('current url after slicing is  : ', clean_url)
                 for i in new_href:
                     slice_new_href = i[22::]
+                    print('new href after slicing : ',
+                          slice_new_href, '\n')
+
                 # Combine the Two nw urls
                 final_url = clean_url + slice_new_href
                 if final_url:
@@ -166,6 +190,10 @@ def sort_by():
                                 contract_types.append(get_titles)
                                 contracts_href.append(get_hrefs)
                             print('Found types : ', contract_types, '\n')
+
+                            # Will be deleted later
+                            print(' COntracts Urls : ',
+                                  contracts_href, '\n')
                             my_type = input(
                                 str('Enter Contract sorting type : '))
 
@@ -184,9 +212,12 @@ def sort_by():
                                         find_url = re.compile('jt=' + value)
                                         found = list(
                                             filter(find_url.search, contracts_href))
+                                        print('url match is : ', found)
+                                        # Next to slice url match   (emploi..)
                                         # must be done with regex later
                                         for i in found:
                                             mid_url = i[22::]
+                                            print('mid url is : ', mid_url)
                                             if mid_url:
                                                 use_this = clean_url + mid_url
                                                 driver.get(use_this)
@@ -222,7 +253,7 @@ def save_jobs():
     page = 1
     word = 'Suivant&nbsp'  # = Next  #pagination is not working yet
     try:
-        #print(' \n page number is ', page)
+        print(' page number is ', page)
         job_titles = []
         job_link = []
         results_col = driver.find_element_by_xpath('//*[@id="resultsCol"]')
@@ -234,41 +265,29 @@ def save_jobs():
             title = title_name.find_element_by_tag_name(
                 'a').text
             job_titles.append(title)
-            title_link = title_name.find_element_by_tag_name(
-                'a').get_attribute('href')
+            title_link = title.get_attribute('href')
             job_link.append(title_link)
+        print(' job name  :  {} , it\'s url : {}').format(
+            job_titles,)
 
-        print("Json file with all data has been created")
+        # html = driver.find_element_by_tag_name('html')
+        # html.send_keys(Keys.END)
+        # pagination = results_col.find_element_by_xpath(
+        #     '//div[25]/a[3]/span/span').text
+        # print("text is ", pagination)
+        # if word in pagination:
+        #     next_link = results_col.find_element_by_xpath(
+        #         '//div[25]/a[3]').get_attribute('href')
+        #     print('next link will be  :',  next_link)
+        #     next_link.click()
+        #     page = page + 1
+        # else:
+        #     print('no other pages available; all job titles has been scrapped')
 
-        # Printing each job name and it'own link in one line
-        # fmt = '{:<8}{:<20}{}'
-        # print(fmt.format('', 'Job name ', '\t*5' 'Job_link \n '))
-        # for i, (name, url) in enumerate(zip(job_titles, job_link)):
-        #     print(fmt.format(i, name, url))
     except:
         Exception()
 
-    counter = 1
-    job_name = ''
-    job_url = ''
-    try:
-        job_name = job_titles
-        job_url = job_link
-    except:
-        Exception()
-
-    f_data = []
-    datas = Jobs(job_name, job_url)
-    if datas:
-        f_data.append(datas)
-    counter = counter + 1
     # Saving the data into a json file
-    with open('Jobs.json', 'w') as f:
-        save_in = {}
-        save_in['Jobs'] = []
-        for w_data in f_data:
-            save_in["Jobs"].append(w_data.serialize())
-        json.dump(save_in, f, indent=4)
 
 
 # Functions call

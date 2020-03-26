@@ -1,0 +1,6 @@
+*.pyc
+/env
+.vscode/
+*.log
+/xpaths.txt
+/tempCodeRunnerFile.s

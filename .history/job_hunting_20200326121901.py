@@ -222,7 +222,7 @@ def save_jobs():
     page = 1
     word = 'Suivant&nbsp'  # = Next  #pagination is not working yet
     try:
-        #print(' \n page number is ', page)
+        print(' \n page number is ', page)
         job_titles = []
         job_link = []
         results_col = driver.find_element_by_xpath('//*[@id="resultsCol"]')

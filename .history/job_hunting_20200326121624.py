@@ -98,8 +98,8 @@ def sort_by():
             all_links.append(link)
 
             # Exclude digits whene returning titles = Locations
-            new_string = ''.join(re.findall("[a-zA-Z]+", string))
-            all_locations.append(new_string)
+            #new_string = ''.join(re.findall("[a-zA-Z]+", string))
+            all_locations.append(string)
 
         # print('urls found : ', all_links, '\n')  # optional delete later
         print('Location\'s Lists :', all_locations, '\n')
@@ -222,7 +222,7 @@ def save_jobs():
     page = 1
     word = 'Suivant&nbsp'  # = Next  #pagination is not working yet
     try:
-        #print(' \n page number is ', page)
+        print(' \n page number is ', page)
         job_titles = []
         job_link = []
         results_col = driver.find_element_by_xpath('//*[@id="resultsCol"]')

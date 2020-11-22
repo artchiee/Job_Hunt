@@ -1,0 +1,312 @@
+[
+    {
+        "id": 1,
+        "title": "Argentina",
+        "href": "https://ar.indeed.com/"
+    },
+    {
+        "id": 2,
+        "title": "Australia",
+        "href": "https://au.indeed.com/"
+    },
+    {
+        "id": 3,
+        "title": "Austria",
+        "href": "https://at.indeed.com/"
+    },
+    {
+        "id": 4,
+        "title": "Bahrain",
+        "href": "https://bh.indeed.com/"
+    },
+    {
+        "id": 5,
+        "title": "Belgium",
+        "href": "https://be.indeed.com/"
+    },
+    {
+        "id": 6,
+        "title": "Brazil",
+        "href": "https://www.indeed.com.br/"
+    },
+    {
+        "id": 7,
+        "title": "Canada",
+        "href": "https://ca.indeed.com/"
+    },
+    {
+        "id": 8,
+        "title": "Chile",
+        "href": "https://cl.indeed.com/"
+    },
+    {
+        "id": 9,
+        "title": "China",
+        "href": "https://cn.indeed.com/"
+    },
+    {
+        "id": 10,
+        "title": "Colombia",
+        "href": "https://co.indeed.com/"
+    },
+    {
+        "id": 11,
+        "title": "Costa Rica",
+        "href": "https://cr.indeed.com/"
+    },
+    {
+        "id": 12,
+        "title": "Czech Republic",
+        "href": "https://cz.indeed.com/"
+    },
+    {
+        "id": 13,
+        "title": "Denmark",
+        "href": "https://dk.indeed.com/"
+    },
+    {
+        "id": 14,
+        "title": "Ecuador",
+        "href": "https://ec.indeed.com/"
+    },
+    {
+        "id": 15,
+        "title": "Egypt",
+        "href": "https://eg.indeed.com/"
+    },
+    {
+        "id": 16,
+        "title": "Finland",
+        "href": "https://fi.indeed.com/"
+    },
+    {
+        "id": 17,
+        "title": "France",
+        "href": "https://www.indeed.fr/"
+    },
+    {
+        "id": 18,
+        "title": "Germany",
+        "href": "https://de.indeed.com/"
+    },
+    {
+        "id": 19,
+        "title": "Greece",
+        "href": "https://gr.indeed.com/"
+    },
+    {
+        "id": 20,
+        "title": "Hong Kong",
+        "href": "https://hk.indeed.com/"
+    },
+    {
+        "id": 21,
+        "title": "Hungary",
+        "href": "https://hu.indeed.com/"
+    },
+    {
+        "id": 22,
+        "title": "India",
+        "href": "https://www.indeed.co.in/"
+    },
+    {
+        "id": 23,
+        "title": "Indonesia",
+        "href": "https://id.indeed.com/"
+    },
+    {
+        "id": 24,
+        "title": "Ireland",
+        "href": "https://ie.indeed.com/"
+    },
+    {
+        "id": 25,
+        "title": "Israel",
+        "href": "https://il.indeed.com/"
+    },
+    {
+        "id": 26,
+        "title": "Italy",
+        "href": "https://it.indeed.com/"
+    },
+    {
+        "id": 27,
+        "title": "Japan",
+        "href": "https://jp.indeed.com/"
+    },
+    {
+        "id": 28,
+        "title": "Kuwait",
+        "href": "https://kw.indeed.com/"
+    },
+    {
+        "id": 29,
+        "title": "Luxembourg",
+        "href": "https://lu.indeed.com/"
+    },
+    {
+        "id": 30,
+        "title": "Malaysia",
+        "href": "https://malaysia.indeed.com/"
+    },
+    {
+        "id": 31,
+        "title": "Mexico",
+        "href": "https://www.indeed.com.mx/"
+    },
+    {
+        "id": 32,
+        "title": "Morocco",
+        "href": "https://ma.indeed.com/"
+    },
+    {
+        "id": 33,
+        "title": "Netherlands",
+        "href": "https://www.indeed.nl/"
+    },
+    {
+        "id": 34,
+        "title": "New Zealand",
+        "href": "https://nz.indeed.com/"
+    },
+    {
+        "id": 35,
+        "title": "Nigeria",
+        "href": "https://ng.indeed.com/"
+    },
+    {
+        "id": 36,
+        "title": "Norway",
+        "href": "https://no.indeed.com/"
+    },
+    {
+        "id": 37,
+        "title": "Oman",
+        "href": "https://om.indeed.com/"
+    },
+    {
+        "id": 38,
+        "title": "Pakistan",
+        "href": "https://pk.indeed.com/"
+    },
+    {
+        "id": 39,
+        "title": "Panama",
+        "href": "https://pa.indeed.com/"
+    },
+    {
+        "id": 40,
+        "title": "Peru",
+        "href": "https://pe.indeed.com/"
+    },
+    {
+        "id": 41,
+        "title": "Philippines",
+        "href": "https://ph.indeed.com/"
+    },
+    {
+        "id": 42,
+        "title": "Poland",
+        "href": "https://pl.indeed.com/"
+    },
+    {
+        "id": 43,
+        "title": "Portugal",
+        "href": "https://pt.indeed.com/"
+    },
+    {
+        "id": 44,
+        "title": "Qatar",
+        "href": "https://qa.indeed.com/"
+    },
+    {
+        "id": 45,
+        "title": "Romania",
+        "href": "https://ro.indeed.com/"
+    },
+    {
+        "id": 46,
+        "title": "Russia",
+        "href": "https://ru.indeed.com/"
+    },
+    {
+        "id": 47,
+        "title": "Saudi Arabia",
+        "href": "https://sa.indeed.com/"
+    },
+    {
+        "id": 48,
+        "title": "Singapore",
+        "href": "https://sg.indeed.com/"
+    },
+    {
+        "id": 49,
+        "title": "South Africa",
+        "href": "https://za.indeed.com/"
+    },
+    {
+        "id": 50,
+        "title": "South Korea",
+        "href": "https://kr.indeed.com/"
+    },
+    {
+        "id": 51,
+        "title": "Spain",
+        "href": "https://es.indeed.com/"
+    },
+    {
+        "id": 52,
+        "title": "Sweden",
+        "href": "https://se.indeed.com/"
+    },
+    {
+        "id": 53,
+        "title": "Switzerland",
+        "href": "https://www.indeed.ch/"
+    },
+    {
+        "id": 54,
+        "title": "Taiwan",
+        "href": "https://tw.indeed.com/"
+    },
+    {
+        "id": 55,
+        "title": "Thailand",
+        "href": "https://th.indeed.com/"
+    },
+    {
+        "id": 56,
+        "title": "Turkey",
+        "href": "https://tr.indeed.com/"
+    },
+    {
+        "id": 57,
+        "title": "Ukraine",
+        "href": "https://ua.indeed.com/"
+    },
+    {
+        "id": 58,
+        "title": "United Arab Emirates",
+        "href": "https://www.indeed.ae/"
+    },
+    {
+        "id": 59,
+        "title": "United Kingdom",
+        "href": "https://www.indeed.co.uk/"
+    },
+    {
+        "id": 60,
+        "title": "Uruguay",
+        "href": "https://uy.indeed.com/"
+    },
+    {
+        "id": 61,
+        "title": "Venezuela",
+        "href": "https://ve.indeed.com/"
+    },
+    {
+        "id": 62,
+        "title": "Vietnam",
+        "href": "https://vn.indeed.com/"
+    }
+]

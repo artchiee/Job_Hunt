@@ -9,6 +9,8 @@ tempCodeRunnerFile.py
 
 # Custom 
 *.json
+!locationsgit.json
+
 xpaths.txt
 job_hunting.py
 Jobs_saver.py

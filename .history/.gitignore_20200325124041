@@ -1,6 +1,0 @@
-*.pyc
-/env
-.vscode/
-*.log
-.txt
-/junk_code.py

@@ -1,0 +1,18 @@
+-- Indeed job scrapping inhaced sript to fit all location (worldwide)
+
+1 . Enter Indeed's worldwide url 
+2 .  Scrapp all location (table contains 3 col) : 
+    - Save to json file with (id(auto_increment), name , url) for each location's name 
+
+3 . let user choose which location to search  based on id input 
+
+4  . type in what(job) => provide auto complition
+    - where(location) => provide auto complition
+
+5 . Sort by date posted (Last 7 days), (can be changed), but i prefer to always sort based on latest offers available .
+
+6 check if there are 6 plus pages, and scrapp theme 
+7  . save all jobs to json file with all crucial details . 
+
+NT : This script can always be further enhanched at specific needs.
+

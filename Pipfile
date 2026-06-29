@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-selenium = ">=4.34,<5.0"
+selenium = ">=4.45.0,<5.0"
 urllib3 = ">=2.5,<3.0"
 
 [dev-packages]
